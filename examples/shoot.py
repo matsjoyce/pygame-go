@@ -1,14 +1,35 @@
+"""
+shoot.py
+========
+Move the cursor to aim, and press space to shoot.
+
+Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the Lesser GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+Lesser GNU General Public License for more details.
+
+You should have received a copy of the Lesser GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
 import pygame_quick
 
-bullet = pygame_quick.surface(10, 10)
-bullet.draw_circle(position=bullet.center, radius=5, color=pygame_quick.color.red)
+bullet = pygame_quick.image(10, 10)
+bullet.draw_circle(position=bullet.center, radius=5, color="red")
 bullets = []
 
 window = pygame_quick.window(600, 400)
 
 while window.active():
-    window.fill(pygame_quick.color.white)
-    window.draw_text(text="Press space to shoot...", position=window.topleft, color=pygame_quick.color.black)
+    window.fill("white")
+    window.draw_text(text="Press space to shoot...", position=window.topleft, color="black")
 
     new_bullets = []
     for x, y in bullets:
