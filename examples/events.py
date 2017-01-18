@@ -19,7 +19,5 @@ while screen.active():
 
         elif type is pygame_quick.key_event:
             print("Key", repr(value), "pressed")
-        else:
-            print(type)
 
     screen.update()

@@ -1,6 +1,7 @@
 from .screen import Screen
 from .surface import Surface
 from .events import EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
+from .input import mouse_position, set_mouse_position
 
 
 def extract_values(enum, suffix, scope):

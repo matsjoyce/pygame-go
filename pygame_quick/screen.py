@@ -7,12 +7,13 @@ from .shortcuts import with_pygame_inited
 class Screen(surface.Surface):
     @with_pygame_inited
     def __init__(self, width, height, framerate=20, autoquit=True):
-        super().fromraw(pygame.display.set_mode((width, height)))
+        self._surf = pygame.display.set_mode((width, height))
         self.framerate = framerate
         self._clock = pygame.time.Clock()
         self._active = True
         self._events = []
         self._autoquit = autoquit
+        self.framenumber = 0
 
     def active(self):
         return self._active
@@ -23,6 +24,7 @@ class Screen(surface.Surface):
     def update(self):
         pygame.display.flip()
         self._clock.tick(self.framerate)
+        self.framenumber += 1
         self._preprocess_events()
 
     def _preprocess_events(self):
