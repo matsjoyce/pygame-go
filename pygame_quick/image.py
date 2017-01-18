@@ -134,9 +134,13 @@ class image:
         width, height = extract_size_kwargs(kwargs)
         color = extract_color_kwargs(kwargs)
         pygame.draw.rect(self._image, color, (x, y, thickness, height))
-        pygame.draw.rect(self._image, color, (x, y, width, thickness))
         pygame.draw.rect(self._image, color, (x + width - thickness, y, thickness, height))
-        pygame.draw.rect(self._image, color, (x, y + height - thickness, width, thickness))
+        if thickness > 1:
+            pygame.draw.rect(self._image, color, (x+1, y+1, width, thickness))
+            pygame.draw.rect(self._image, color, (x, y + height - thickness, width, thickness))
+        else:
+            pygame.draw.line(self._image, color, (x, y), (x + width - 1, y))
+            pygame.draw.line(self._image, color, (x, y + height - 1), (x + width - 1, y + height - 1))
 
     def draw_circle(self, *, radius, **kwargs):
         position = extract_position_kwargs(kwargs)

@@ -26,7 +26,7 @@ window = pygame_quick.window(600, 400)
 window.fill("white")
 
 window.draw_rect(position=(100, 100), size=(80, 80), color="red")
-window.draw_hollow_rect(position=(100, 100), size=(80, 80), color="cyan", thickness=5)
+window.draw_hollow_rect(position=(100, 100), size=(80, 80), color="cyan", thickness=1)
 
 window.draw_rect(position=(150, 300), size=(300, 75), color="blue")
 window.draw_hollow_rect(position=(150, 300), size=(300, 75), color="yellow", thickness=10)
