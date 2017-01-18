@@ -1,5 +1,5 @@
 import pygame_quick
 
-screen = pygame_quick.Screen(600, 400)
-while screen.active():
-    screen.update()
+window = pygame_quick.window(600, 400)
+while window.active():
+    window.update()

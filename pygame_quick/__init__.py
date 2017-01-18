@@ -1,7 +1,8 @@
-from .screen import Screen
-from .surface import Surface
+from .window import window
+from .surface import surface
 from .events import EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
 from .input import mouse_position, set_mouse_position
+from .color import color
 
 
 def extract_values(enum, suffix, scope):
@@ -10,7 +11,7 @@ def extract_values(enum, suffix, scope):
 
 
 # provide shortcuts to the enum values
-extract_values(EventType, "_event", locals())
+extract_values(EventType, "", locals())
 extract_values(Button, "_button", locals())
 extract_values(VerticalScrollDirection, "_scroll", locals())
 extract_values(HorizontalScrollDirection, "_scroll", locals())

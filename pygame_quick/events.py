@@ -4,8 +4,8 @@ import pygame
 
 class EventType(enum.Enum):
     quit = "quit"
-    key = "keypress"
-    mouse = "mouse"
+    key_down = "keypress"
+    mouse_down = "mouse"
     mouse_motion = "mouse_motion"
 
 
@@ -102,7 +102,7 @@ def expand_event(event):
             key_value = "<Down>"
         else:
             return None, None
-        return EventType.key, key_value
+        return EventType.key_down, key_value
 
     elif event.type == pygame.MOUSEMOTION:
         l, m, r = event.buttons
@@ -116,7 +116,7 @@ def expand_event(event):
         return EventType.mouse_motion, MouseMotionEvent(event.pos, event.rel, buttons)
 
     elif event.type == pygame.MOUSEBUTTONDOWN:
-        return EventType.mouse, MouseEvent(event.pos, *translate_button(event.button))
+        return EventType.mouse_down, MouseEvent(event.pos, *translate_button(event.button))
 
     elif event.type in (pygame.ACTIVEEVENT, pygame.KEYUP,
                         pygame.MOUSEBUTTONUP, pygame.JOYAXISMOTION,

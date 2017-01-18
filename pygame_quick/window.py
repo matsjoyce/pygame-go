@@ -1,13 +1,14 @@
 import pygame
 
 from . import surface, events
-from .shortcuts import with_pygame_inited
+from .shortcuts import with_pygame_inited, extract_size_args
 
 
-class Screen(surface.Surface):
+class window(surface.surface):
     @with_pygame_inited
-    def __init__(self, width, height, framerate=20, autoquit=True):
-        self._surf = pygame.display.set_mode((width, height))
+    def __init__(self, *args, framerate=20, autoquit=True, **kwargs):
+        size = extract_size_args(args, kwargs)
+        self._surf = pygame.display.set_mode(size)
         self.framerate = framerate
         self._clock = pygame.time.Clock()
         self._active = True
