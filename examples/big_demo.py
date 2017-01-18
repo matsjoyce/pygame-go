@@ -23,6 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import pygame_quick
 import random
 
+window = pygame_quick.window(600, 400)
+
 background_color = pygame_quick.color.white
 block_x = block_y = 50
 
@@ -34,9 +36,6 @@ block3 = pygame_quick.image(10, 100)
 block3.fill("blue")
 block4 = pygame_quick.image(10, 100)
 block4.fill("tomato")
-
-# Note: window does not need to be created first
-window = pygame_quick.window(600, 400)
 
 while window.active():
     for type, value in window.events():
@@ -65,11 +64,11 @@ while window.active():
                 print("Key", repr(value), "pressed")
 
     window.fill(background_color)
-    window.draw_rectangle(color="blue", x=100, y=100, width=100, height=100)
+    window.draw_rect(color="blue", x=100, y=100, width=100, height=100)
     window.draw_circle(color="green", x=500, y=300, radius=100)
 
     window.draw_line(start=window.topright, end=window.bottomleft, color="brown")
-    window.draw_hollow_rectangle(color="red", x=100, y=100, width=100, height=100, thickness=10)
+    window.draw_hollow_rect(color="red", x=100, y=100, width=100, height=100, thickness=10)
     window.draw_hollow_circle(color="red", x=500, y=300, radius=100, thickness=10)
 
     block.draw(window, block_x, block_y)

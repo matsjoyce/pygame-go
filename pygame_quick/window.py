@@ -26,7 +26,7 @@ class window(image.image):
     @with_pygame_inited
     def __init__(self, *args, framerate=20, autoquit=True, **kwargs):
         size = extract_size_args(args, kwargs)
-        self._surf = pygame.display.set_mode(size)
+        self._image = pygame.display.set_mode(size)
         self.framerate = framerate
         self._clock = pygame.time.Clock()
         self._active = True
@@ -45,6 +45,10 @@ class window(image.image):
         self._clock.tick(self.framerate)
         self.framenumber += 1
         self._preprocess_events()
+
+    def loop_forever(self):
+        while self.active():
+            self.update()
 
     def _preprocess_events(self):
         self._events.clear()

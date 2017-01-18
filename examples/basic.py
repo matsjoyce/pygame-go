@@ -24,5 +24,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import pygame_quick
 
 window = pygame_quick.window(600, 400)
-while window.active():
-    window.update()
+window.loop_forever()

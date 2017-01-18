@@ -1,5 +1,8 @@
 """
-pygame-quick - A simplified version of pygame for use in teaching
+basic.py
+========
+Draws a square, rectangle and circle, then sits like a duck.
+
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
@@ -16,16 +19,20 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame
 
-from .shortcuts import with_pygame_inited, extract_position_args
+import pygame_quick
 
+window = pygame_quick.window(600, 400)
+window.fill("white")
 
-@with_pygame_inited
-def mouse_position():
-    return pygame.mouse.get_pos()
+window.draw_rect(position=(100, 100), size=(80, 80), color="red")
+window.draw_hollow_rect(position=(100, 100), size=(80, 80), color="cyan", thickness=5)
 
+window.draw_rect(position=(150, 300), size=(300, 75), color="blue")
+window.draw_hollow_rect(position=(150, 300), size=(300, 75), color="yellow", thickness=10)
 
-@with_pygame_inited
-def set_mouse_position(*args, **kwargs):
-    pygame.mouse.set_pos(extract_position_args(args, kwargs))
+window.draw_circle(position=(500, 150), radius=80, color="green")
+window.draw_hollow_circle(position=(500, 150), radius=80, color="magenta", thickness=20)
+
+window.loop_forever()
+

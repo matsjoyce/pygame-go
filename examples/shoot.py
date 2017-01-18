@@ -21,11 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygame_quick
 
+window = pygame_quick.window(600, 400)
+
 bullet = pygame_quick.image(10, 10)
 bullet.draw_circle(position=bullet.center, radius=5, color="red")
 bullets = []
-
-window = pygame_quick.window(600, 400)
 
 while window.active():
     window.fill("white")

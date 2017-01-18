@@ -34,4 +34,7 @@ extract_values(Button, "_button", locals())
 extract_values(VerticalScrollDirection, "_scroll", locals())
 extract_values(HorizontalScrollDirection, "_scroll", locals())
 
+# Leave module level as clean as possible
+
 del extract_values
+del EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
