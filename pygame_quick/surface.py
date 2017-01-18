@@ -1,7 +1,7 @@
 import pathlib
 import pygame
 
-from . import color
+from . import color, rendertext
 from .shortcuts import with_pygame_inited
 from .shortcuts import extract_position_args, extract_position_kwargs
 from .shortcuts import extract_size_args, extract_size_kwargs
@@ -131,3 +131,12 @@ class surface:
         start = extract_position_kwargs(kwargs, "start", ("start_x", "start_y"))
         end = extract_position_kwargs(kwargs, "end", ("end_x", "end_y"))
         pygame.draw.line(self._surf, color, start, end, thickness)
+
+    def draw_text(self, *, text, size=30, font=None, bold=False, italic=False, **kwargs):
+        if "\n" in text:
+            raise TypeError("Cannot render newlines")
+        color = extract_color_kwargs(kwargs)
+        position = extract_position_kwargs(kwargs)
+        font = rendertext.get_font(size, font, bold, italic)
+        textsurf = font.render(text, True, color)
+        self._surf.blit(textsurf, position)

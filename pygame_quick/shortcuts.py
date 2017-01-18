@@ -19,7 +19,7 @@ def extract_position_kwargs(kwargs, single_name="position", multi_names=("x", "y
     elif all(i in kwargs for i in multi_names):
         pos = (kwargs[i] for i in multi_names)
     else:
-        raise TypeError("You must give either {} or {} and {}", single_name, *multi_names)
+        raise TypeError("You must give either {} or {} and {}".format(single_name, *multi_names))
     return check_position(pos)
 
 
@@ -59,7 +59,7 @@ def extract_color_kwargs(kwargs, single_name="color", multi_names=("r", "g", "b"
         a = kwargs.get(multi_names[-1], 255)
         color = r, g, b, a
     else:
-        raise TypeError("You must give either {} or {}, {} and {}", single_name, *multi_names[:3])
+        raise TypeError("You must give either {} or {}, {} and {}".format(single_name, *multi_names[:3]))
     return check_color(color)
 
 

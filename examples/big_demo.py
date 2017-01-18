@@ -46,15 +46,17 @@ while window.active():
     window.draw_rectangle(color="blue", x=100, y=100, width=100, height=100)
     window.draw_circle(color="green", x=500, y=300, radius=100)
 
-    window.draw_line(start=window.topleft, end=window.bottomright, color="brown")
+    window.draw_line(start=window.topright, end=window.bottomleft, color="brown")
     window.draw_hollow_rectangle(color="red", x=100, y=100, width=100, height=100, thickness=10)
     window.draw_hollow_circle(color="red", x=500, y=300, radius=100, thickness=10)
 
     block.draw(window, block_x, block_y)
     block2.draw_by_center(window, pygame_quick.mouse_position())
     block3.draw_by_center(window, window.center)
-    block4.draw(window, (10, 20))
+    block4.draw(window, (50, 20))
     block4.draw_by_bottomright(window, window.bottomright)
+
+    window.draw_text(text=str(window.framenumber), position=window.topleft, color=pygame_quick.color.black)
 
     window.update()
 
