@@ -25,7 +25,7 @@ while screen.active():
                 print("Mouse click at", value.position, "using right button")
             elif value.button is pygame_quick.middle_button:
                 print("Mouse click at", value.position, "using middle button")
-            else:
+            elif value.is_scroll():
                 print("Mouse scroll at", value.position, "using direction", value.scroll_direction)
 
         elif type is pygame_quick.key_event:
@@ -43,6 +43,8 @@ while screen.active():
                 print("Key", repr(value), "pressed")
 
     screen.fill(background_color)
+    screen.draw_rectangle("blue", x=100, y=100, width=100, height=100)
+    screen.draw_circle("green", x=500, y=300, radius=100)
     block.draw(screen, block_x, block_y)
     block2.draw_by_center(screen, pygame_quick.mouse_position())
     block3.draw_by_center(screen, screen.center)

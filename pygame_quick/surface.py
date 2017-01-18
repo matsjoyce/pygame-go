@@ -74,3 +74,9 @@ class Surface:
         x -= w // 2
         y -= h // 2
         onto_surf._surf.blit(self._surf, (x, y))
+
+    def draw_rectangle(self, color, x, y, width, height):
+        pygame.draw.rect(self._surf, check_color(color), (x, y, width, height))
+
+    def draw_circle(self, color, x, y, radius):
+        pygame.draw.circle(self._surf, check_color(color), (x, y), radius)

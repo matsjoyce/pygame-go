@@ -13,7 +13,7 @@ def with_pygame_inited(func):
     return wpi_wrapper
 
 
-def check_position(x, y):
+def check_position(x, y=None):
     if isinstance(x, tuple):
         check = x
     else:
@@ -21,7 +21,7 @@ def check_position(x, y):
     return tuple(map(int, check))
 
 
-def check_color(r, g, b, a):
+def check_color(r, g=None, b=None, a=None):
     if isinstance(r, color.Color):
         return r.color
     elif isinstance(r, tuple):

@@ -11,7 +11,7 @@ while screen.active():
                 print("Mouse click at", value.position, "using right button")
             elif value.button is pygame_quick.middle_button:
                 print("Mouse click at", value.position, "using middle button")
-            else:
+            elif value.is_scroll():
                 print("Mouse scroll at", value.position, "using direction", value.scroll_direction)
 
         elif type is pygame_quick.mouse_motion_event:
