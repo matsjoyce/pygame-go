@@ -21,6 +21,7 @@ from .image import image, Alignment
 from .events import EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
 from .input import mouse_position, set_mouse_position
 from .color import color
+from .sound import sound
 
 
 def extract_values(enum, suffix, scope):
