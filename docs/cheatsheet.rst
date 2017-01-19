@@ -17,7 +17,7 @@ The rest of this sheet will assume the shorter name.
 How do I create a window to draw in?
 ------------------------------------
 
-You need to decide the width and height of the window. Say you wanted a window with a width of `600` and a height of `400`::
+You need to decide the width and height of the window. Say you wanted a window with a width of ``600`` and a height of ``400``::
 
     window = pgq.window(600, 400)
 
@@ -66,7 +66,7 @@ An image is something you can draw on. You can create images just like you creat
 
     img = pgq.image(40, 30)
 
-That will create an image that has a width of `40` and a height of `30`. A new image will be transparent. You can get the width and height of an image::
+That will create an image that has a width of ``40`` and a height of ``30``. A new image will be transparent. You can get the width and height of an image::
 
     print("image width is", image.width, "and height is", image.height)
 
@@ -75,7 +75,7 @@ Or::
     print("image size is", image.size)
 
 
-If you want a copy of an image, use `image.copy`::
+If you want a copy of an image, use ``image.copy``::
 
     image_copy = image.copy()
 
@@ -87,12 +87,12 @@ You can use them to draw on the window! Say you had an image with a face draw on
     face.draw(window, x=0, y=0)
     face.draw(window, x=100, y=100)
 
-The x and y values specify where to draw the face. If you draw the face with `x=30, y=40` the top-left corner of the face image will be drawn at (30, 40).
+The x and y values specify where to draw the face. If you draw the face with ``x=30, y=40`` the top-left corner of the face image will be drawn at (30, 40).
 
 How do I get an image of a face?
 --------------------------------
 
-Well, one way is to have an image of a face, and load it. Say the image is called `/home/bob/face.jpg`. You could load it like this::
+Well, one way is to have an image of a face, and load it. Say the image is called ``/home/bob/face.jpg``. You could load it like this::
 
     face = pgq.image("/home/bob/face.jpg")
 
@@ -107,7 +107,7 @@ Or::
 
     face.draw(window, window.center, align=face.center)
 
-This says draw face such that the center of `face` is at the center of `window`. If you want to put the top-right corner of face at the center of window, do this::
+This says draw face such that the center of ``face`` is at the center of ``window``. If you want to put the top-right corner of face at the center of window, do this::
 
     face.draw(window, window.center, align=pgq.topright)
 
@@ -197,7 +197,7 @@ Yup, just like rectangles. Do draw a cyan border of thickness 10 do::
 Eh, thinking up color names is a pain. Is there a list somewhere?
 -----------------------------------------------------------------
 
-Yes there is! It is called `pgq.color_names`. Want a random color? Just this way::
+Yes there is! It is called ``pgq.color_names``. Want a random color? Just this way::
 
     import random
     random.choice(pgq.color_names)
@@ -232,7 +232,7 @@ OK, OK, here's font size 60::
 Ha! Show me how to put "YOU DIED!" in the middle of the window!
 ---------------------------------------------------------------
 
-`draw_text` accepts the same align arguments as `draw`, so do it the same way::
+``draw_text`` accepts the same align arguments as ``draw``, so do it the same way::
 
     window.draw_text(text="YOU DIED!", position=window.center, color="red", size=60, align=pgq.center)
 
@@ -256,7 +256,7 @@ Modify your loop to look like this::
         # drawing here
         window.update()
 
-To check for a key press, replace `# handle events here` with::
+To check for a key press, replace ``# handle events here`` with::
 
     if type is pgq.key_down:
         print("You pressed", value)
@@ -279,21 +279,21 @@ Some special keys:
 ====================== ==========
 If you are looking for Test for
 ====================== ==========
-Return key             "\n"
-Space bar              " "
-Shift key              "<Shift>"
-Ctrl key               "<Ctrl>"
-Meta (windows) key     "<Meta>"
-Left arrow             "<Left>"
-Right arrow            "<Right>"
-Up arrow               "<Up>"
-Down arrow             "<Down>"
+Return key             ``"\n"``
+Space bar              ``" "``
+Shift key              ``"<Shift>"``
+Ctrl key               ``"<Ctrl>"``
+Meta (windows) key     ``"<Meta>"``
+Left arrow             ``"<Left>"``
+Right arrow            ``"<Right>"``
+Up arrow               ``"<Up>"``
+Down arrow             ``"<Down>"``
 ====================== ==========
 
 How about if they press the mouse?
 ----------------------------------
 
-You can check for `pgq.mouse_down`. If you only want clicks, test like this::
+You can check for ``pgq.mouse_down``. If you only want clicks, test like this::
 
     if type is pgq.mouse_down and value.is_click():
         print("You clicked a mouse button at", value.x, value.y)
@@ -324,7 +324,7 @@ Do this::
     if type is pgq.mouse_down and value.is_scroll():
         print("You scrolled", value.scroll_direction, "at", position)
 
-`value.direction` will be one of::
+``value.direction`` will be one of::
 
     pgq.up_scroll
     pgq.down_scroll
@@ -334,7 +334,7 @@ Do this::
 What about if they move the mouse?
 ----------------------------------
 
-Test for `pgq.mouse_motion`::
+Test for ``pgq.mouse_motion``::
 
     if type is pgq.mouse_motion:
         print("You moved the mouse from", value.from_position, "to", value.to_position)
@@ -344,7 +344,7 @@ You can also see how much the mouse moved::
     if type is pgq.mouse_motion:
         print("You moved the mouse by", value.moved_by_x, value.moved_by_y)
 
-If you want to see if any buttons were pressed during the movement, test them using `value.is_pressed`::
+If you want to see if any buttons were pressed during the movement, test them using ``value.is_pressed``::
 
     if value.is_pressed(pgq.left_button):
         print("Drag with left button")
@@ -356,14 +356,14 @@ If you want to see if any buttons were pressed during the movement, test them us
 Just tell me where the mouse is now!
 ------------------------------------
 
-Use `pgq.mouse_position`::
+Use ``pgq.mouse_position``::
 
     print("The mouse is at", pgq.mouse_position())
 
 Can I move where the mouse is?
 ------------------------------
 
-Use `pgq.set_mouse_position`::
+Use ``pgq.set_mouse_position``::
 
     pgq.set_mouse_position(window.center)
 
@@ -374,12 +374,12 @@ When you create your window, you can change how fast it updates::
 
     window = pgq.window(WINDOW_SIZE, framerate=5)
 
-`framerate` is normally 20. You can make it smaller to slow the game down or larger to speed it up.
+``framerate`` is normally 20. You can make it smaller to slow the game down or larger to speed it up.
 
 Can I tell which frame I am on?
 -------------------------------
 
-Look at `window.frame_number`::
+Look at ``window.frame_number``::
 
     print("You are on frame", window.frame_number)
 
@@ -390,7 +390,7 @@ You can use this like a timer, but it will not be very accurate::
 How can I stop the game when the player looses?
 -----------------------------------------------
 
-Call `window.stop`::
+Call ``window.stop``::
 
     if player_lost:
         window.stop()
@@ -399,7 +399,7 @@ Call `window.stop`::
 OK, last thing. I want explosion noises!
 ----------------------------------------
 
-Sure. If you call your sound file `/home/bob/explosion.wav`, load it like this::
+Sure. If you call your sound file ``/home/bob/explosion.wav``, load it like this::
 
     explosion = pgq.sound("/home/bob/explosion.wav")
 
