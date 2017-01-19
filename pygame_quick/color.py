@@ -84,6 +84,7 @@ class color:
 
     colors = {}
 
+
 for name, values in pygame.colordict.THECOLORS.items():
     c = color(values)
     setattr(color, name, c)

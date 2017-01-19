@@ -23,6 +23,8 @@ from .input import mouse_position, set_mouse_position
 from .color import color
 from .sound import sound
 
+color_names = list(color.colors)
+
 
 def extract_values(enum, suffix, scope):
     for value in enum:
