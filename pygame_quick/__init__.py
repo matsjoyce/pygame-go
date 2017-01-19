@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from .window import window
-from .image import image
+from .image import image, Alignment
 from .events import EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
 from .input import mouse_position, set_mouse_position
 from .color import color
@@ -33,8 +33,9 @@ extract_values(EventType, "", locals())
 extract_values(Button, "_button", locals())
 extract_values(VerticalScrollDirection, "_scroll", locals())
 extract_values(HorizontalScrollDirection, "_scroll", locals())
+extract_values(Alignment, "", locals())
 
 # Leave module level as clean as possible
 
 del extract_values
-del EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
+del EventType, Button, VerticalScrollDirection, HorizontalScrollDirection, Alignment

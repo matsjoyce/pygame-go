@@ -16,6 +16,7 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import enum
 import pathlib
 import pygame
 import os
@@ -25,6 +26,27 @@ from .shortcuts import with_pygame_inited, with_display_inited
 from .shortcuts import extract_position_args, extract_position_kwargs
 from .shortcuts import extract_size_args, extract_size_kwargs
 from .shortcuts import extract_color_args, extract_color_kwargs
+
+
+class Alignment(enum.Enum):
+    center = "center"
+    topleft = "topleft"
+    topright = "topright"
+    bottomleft = "bottomleft"
+    bottomright = "bottomright"
+
+
+def translate_align(align, width, height):
+    if align is Alignment.center:
+        return width // 2, height // 2
+    elif align is Alignment.topleft:
+        return 0, 0
+    elif align is Alignment.topright:
+        return width, 0
+    elif align is Alignment.bottomleft:
+        return 0, height
+    elif align is Alignment.bottomright:
+        return width, height
 
 
 class image:
@@ -92,35 +114,26 @@ class image:
         return self.size
 
     def draw(self, onto_image, *args, **kwargs):
-        onto_image._image.blit(self._image, extract_position_args(args, kwargs))
+        if "align" in kwargs:
+            if "align_x" in kwargs:
+                raise TypeError("You can only give align or align_x and align_y, not both!")
+            if kwargs["align"] in Alignment:
+                offset = translate_align(kwargs.pop("align"), *self.size)
+            else:
+                offset = check_position(kwargs.pop("align"))
+        elif "align_x" in kwargs or "align_y" in kwargs:
+            if "align_x" in kwargs and "align_y" in kwargs:
+                offset = check_position((kwargs.pop("align_x"), kwargs.pop("align_y")))
+            else:
+                raise TypeError("You must give both align_x and align_y, or neither!")
+        else:
+            offset = 0, 0
 
-    draw_by_topleft = draw
-
-    def draw_by_center(self, onto_image, *args, **kwargs):
         x, y = extract_position_args(args, kwargs)
-        w, h = self.size
-        x -= w // 2
-        y -= h // 2
-        self.draw(onto_image, x, y)
+        x -= offset[0]
+        y -= offset[1]
 
-    def draw_by_topright(self, onto_image, *args, **kwargs):
-        x, y = extract_position_args(args, kwargs)
-        w, h = self.size
-        x -= w
-        self.draw(onto_image, x, y)
-
-    def draw_by_bottomleft(self, onto_image, *args, **kwargs):
-        x, y = extract_position_args(args, kwargs)
-        w, h = self.size
-        y -= h
-        self.draw(onto_image, x, y)
-
-    def draw_by_bottomright(self, onto_image, *args, **kwargs):
-        x, y = extract_position_args(args, kwargs)
-        w, h = self.size
-        x -= w
-        y -= h
-        self.draw(onto_image, x, y)
+        onto_image._image.blit(self._image, (x, y))
 
     def draw_rect(self, **kwargs):
         position = extract_position_kwargs(kwargs)
@@ -136,7 +149,7 @@ class image:
         pygame.draw.rect(self._image, color, (x, y, thickness, height))
         pygame.draw.rect(self._image, color, (x + width - thickness, y, thickness, height))
         if thickness > 1:
-            pygame.draw.rect(self._image, color, (x+1, y+1, width, thickness))
+            pygame.draw.rect(self._image, color, (x, y, width, thickness))
             pygame.draw.rect(self._image, color, (x, y + height - thickness, width, thickness))
         else:
             pygame.draw.line(self._image, color, (x, y), (x + width - 1, y))
@@ -161,8 +174,27 @@ class image:
     def draw_text(self, *, text, size=30, font=None, bold=False, italic=False, **kwargs):
         if "\n" in text:
             raise TypeError("Cannot render newlines")
+
         color = extract_color_kwargs(kwargs)
-        position = extract_position_kwargs(kwargs)
+        x, y = extract_position_kwargs(kwargs)
         font = rendertext.get_font(size, font, bold, italic)
         textimage = font.render(text, True, color)
-        self._image.blit(textimage, position)
+
+        if "align" in kwargs:
+            if "align_x" in kwargs:
+                raise TypeError("You can only give align or align_x and align_y, not both!")
+            if kwargs["align"] in Alignment:
+                offset = translate_align(kwargs["align"], *textimage.get_size())
+            else:
+                offset = check_position(kwargs["align"])
+        elif "align_x" in kwargs or "align_y" in kwargs:
+            if "align_x" in kwargs and "align_y" in kwargs:
+                offset = check_position((kwargs["align_x"], kwargs["align_y"]))
+            else:
+                raise TypeError("You must give both align_x and align_y, or neither!")
+        else:
+            offset = 0, 0
+        x -= offset[0]
+        y -= offset[1]
+
+        self._image.blit(textimage, (x, y))

@@ -50,7 +50,7 @@ food_image.fill("red")
 while window.active():
     window.fill("white")
     if snake_dead:
-        window.draw_text(text="YOU DIED!", position=window.topleft, color="red", size=60)
+        window.draw_text(text="YOU DIED!", position=window.center, color="red", size=60, align=pgq.center)
         window.update()
         continue
 
