@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import functools
 import pygame
+import collections
 
 from . import color
 
@@ -76,6 +77,14 @@ def extract_position_args(args, kwargs, *kwarg_extract):
 
 
 def check_position(value):
+    if not isinstance(value, collections.abc.Iterable):
+        raise ValueError("Color must be iterable, not {}".format(type(value)))
+    value = tuple(value)
+    if len(value) != 2:
+        raise ValueError("Positions must have two components")
+    for v in value:
+        if not isinstance(v, (int, float)):
+            raise RuntimeError("Position component must be a number, not {}".format(type(v)))
     return tuple(map(int, value))
 
 
@@ -127,7 +136,12 @@ def check_color(value):
             return color.color.colors[value].color
         else:
             raise ValueError("Unknown color '{}', maybe you spelt the name wrong?".format(value))
+    elif not isinstance(value, collections.abc.Iterable):
+        raise ValueError("Color must be iterable, not {}".format(type(value)))
     value = tuple(value)
     if len(value) not in (3, 4):
         raise ValueError("Colors must have 3 or 4 components for RGBA")
+    for v in value:
+        if not isinstance(v, (int, float)):
+            raise RuntimeError("Color component must be a number, not {}".format(type(v)))
     return tuple(map(color.color_clamp, value))
