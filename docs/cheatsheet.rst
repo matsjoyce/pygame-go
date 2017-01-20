@@ -187,7 +187,13 @@ If you need to fill an image with a see-though (transparent) color::
 
     image.fill(255, 0, 0, 127)
 
-That will fill image with red and will be 50% transparent.
+That will fill image with red and will be 50% transparent. You can also specify the fill color when creating the image::
+
+    img = pgq.image(40, 30, color="red")
+
+And the same for the window::
+
+    window = pgq.window(size=WINDOW_SIZE, color="green")
 
 Ooo! Do I have to make an image if I want to draw a rectangle? It sounds like a lot of work...
 ----------------------------------------------------------------------------------------------

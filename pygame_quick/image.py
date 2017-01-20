@@ -52,8 +52,14 @@ class image:
                 raise IOError("Could not load '{}', are you sure it's an image?".format(path))
 
         else:
+            if "color" in kwargs or "r" in kwargs:
+                fill_with = extract_color_kwargs(kwargs)
+            else:
+                fill_with = None
             size = extract_size_args(args, kwargs)
             self._image = pygame.Surface(size, pygame.SRCALPHA)
+            if fill_with is not None:
+                self.fill(fill_with)
 
     @classmethod
     @with_display_inited

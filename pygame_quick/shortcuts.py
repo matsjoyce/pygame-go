@@ -106,9 +106,9 @@ def extract_color_kwargs(kwargs, single_name="color", multi_names=("r", "g", "b"
     if got_in_single and got_in_multi:
         raise TypeError("You must give either {} or {}, {} and {}, not both!".format(single_name, *multi_names[:3]))
     elif got_in_single:
-        color = kwargs[single_name]
+        color = kwargs.pop(single_name)
     elif got_in_multi:
-        r, g, b = (kwargs[i] for i in multi_names[:3])
+        r, g, b = (kwargs.pop(i) for i in multi_names[:3])
         a = kwargs.get(multi_names[-1], 255)
         color = r, g, b, a
     else:
