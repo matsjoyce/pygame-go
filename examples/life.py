@@ -24,7 +24,7 @@ import itertools
 
 block_size = 20
 
-window = pgq.window(600, 400, frame_rate=10)
+window = pgq.window(1000, 600, frame_rate=10)
 
 cells = set()
 paused = False
@@ -77,14 +77,19 @@ while window.active():
             cells.add(point_to_block(*value.start))
 
     blocks_x, blocks_y = window.width // block_size, window.width // block_size
+
+    alive = pgq.image(block_size, block_size, color="white")
+    alive.draw_hollow_rect(position=alive.topleft, size=alive.size, color="gray10")
+
+    dead = pgq.image(block_size, block_size, color="black")
+    dead.draw_hollow_rect(position=dead.topleft, size=dead.size, color="gray10")
+
     for x in range(-blocks_x // 2 - 1, blocks_x // 2 + 2):
         for y in range(-blocks_y // 2 - 1, blocks_y // 2 + 2):
             if (x, y) in cells:
-                window.draw_rect(position=block_to_point(x, y), width=block_size, height=block_size, color="white")
-                window.draw_hollow_rect(position=block_to_point(x, y), width=block_size, height=block_size, color="gray10")
+                window.draw_image(alive, block_to_point(x, y))
             else:
-                window.draw_rect(position=block_to_point(x, y), width=block_size, height=block_size, color="black")
-                window.draw_hollow_rect(position=block_to_point(x, y), width=block_size, height=block_size, color="gray10")
+                window.draw_image(dead, block_to_point(x, y))
 
     if paused:
         window.draw_text(text="Paused", position=window.topleft, color="red")
