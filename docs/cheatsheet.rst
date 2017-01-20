@@ -68,7 +68,7 @@ Or::
 
 ``image`` can be any image you want.
 
-But how do I draw stuff? That black screen is boring!
+But how do I draw stuff? That white screen is boring!
 -----------------------------------------------------
 
 Well, do some drawing in your main loop::
@@ -168,7 +168,7 @@ And flip it::
 
 ``vertical=True`` means that the image is reflected along the x-axis and ``horizontal=True`` means that the image is reflected along the y-axis.
 
-But the black background is still there! I want it green!
+But the white background is still there! I want it green!
 ---------------------------------------------------------
 
 Well, before drawing your faces, do this::

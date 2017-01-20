@@ -38,6 +38,8 @@ class window(image.image):
         self.frame_number = 0
         self.title = title
 
+        self.fill("white")
+
     def active(self):
         return self._active
 
