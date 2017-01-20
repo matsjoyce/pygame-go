@@ -43,6 +43,6 @@ while window.active():
             bullets.append((bullet_x, window.height))
 
     for bullet_position in bullets:
-        bullet.draw(window, bullet_position, align=pygame_quick.center)
+        window.draw_image(bullet, bullet_position, align=pygame_quick.center)
 
     window.update()

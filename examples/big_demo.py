@@ -82,11 +82,11 @@ while window.active():
     window.draw_line(start=window.topright, end=window.bottomleft, color="brown")
     window.draw_hollow_circle(color="red", x=500, y=300, radius=100, thickness=10)
 
-    block.draw(window, block_x, block_y)
-    block2.draw(window, pygame_quick.mouse_position(), align=pygame_quick.center)
-    block3.draw(window, window.center, align=pygame_quick.center)
-    block4.draw(window, (50, 20))
-    block4.draw(window, window.bottomright, align=pygame_quick.bottomright)
+    window.draw_image(block, block_x, block_y)
+    window.draw_image(block2, pygame_quick.mouse_position(), align=pygame_quick.center)
+    window.draw_image(block3, window.center, align=pygame_quick.center)
+    window.draw_image(block4, (50, 20))
+    window.draw_image(block4, window.bottomright, align=pygame_quick.bottomright)
 
     window.draw_text(text=str(window.frame_number), position=window.topleft, color=pygame_quick.color.black)
     window.draw_text(text=str(window.frame_number), position=window.bottomright, color=pygame_quick.color.black,

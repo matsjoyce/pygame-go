@@ -75,11 +75,11 @@ while window.active():
 
     for i, part in enumerate(snake_parts):
         if i == 0:
-            head_image.draw(window, part)
+            window.draw_image(head_image, part)
         elif i % 2:
-            tail_image_odd.draw(window, part)
+            window.draw_image(tail_image_odd, part)
         else:
-            tail_image_even.draw(window, part)
-    food_image.draw(window, food_location)
+            window.draw_image(tail_image_even, part)
+    window.draw_image(food_image, food_location)
     window.draw_text(text="Score: {}".format(len(snake_parts) - 3), position=window.topleft, color="black")
     window.update()

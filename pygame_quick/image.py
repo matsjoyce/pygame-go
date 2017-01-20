@@ -107,11 +107,11 @@ class image:
     def bottomright(self):
         return self.size
 
-    def draw(self, onto_image, *args, **kwargs):
-        ox, oy = extract_align_kwargs(kwargs, self.size)
+    def draw_image(self, image, *args, **kwargs):
+        ox, oy = extract_align_kwargs(kwargs, image.size)
         x, y = extract_position_args(args, kwargs)
 
-        onto_image._image.blit(self._image, (x - ox, y - oy))
+        self._image.blit(image._image, (x - ox, y - oy))
 
     def draw_rect(self, **kwargs):
         x, y = extract_position_kwargs(kwargs)

@@ -104,8 +104,8 @@ What use are images?
 
 You can use them to draw on the window! Say you had an image with a face draw on it, and you wanted to draw that face on the window several times. You can do that like this::
 
-    face.draw(window, x=0, y=0)
-    face.draw(window, x=100, y=100)
+    window.draw_image(face, x=0, y=0)
+    window.draw_image(face, x=100, y=100)
 
 The x and y values specify where to draw the face. If you draw the face with ``x=30, y=40`` the top-left corner of the face image will be drawn at (30, 40).
 
@@ -121,15 +121,15 @@ Wow! What if I want to put the face in the middle of the screen? Or a corner?
 
 To draw it in the center::
 
-    face.draw(window, window.center, align=pgq.center)
+    window.draw_image(face, window.center, align=pgq.center)
 
 Or::
 
-    face.draw(window, window.center, align=face.center)
+    window.draw_image(face, window.center, align=face.center)
 
 This says draw face such that the center of ``face`` is at the center of ``window``. If you want to put the top-right corner of face at the center of window, do this::
 
-    face.draw(window, window.center, align=pgq.topright)
+    window.draw_image(face, window.center, align=pgq.topright)
 
 For the position to draw to you can pick any of::
 

@@ -28,5 +28,5 @@ block.fill(pygame_quick.color.red)
 
 while window.active():
     window.fill(pygame_quick.color.white)
-    block.draw(window, pygame_quick.mouse_position(), align=pygame_quick.center)
+    window.draw_image(block, pygame_quick.mouse_position(), align=pygame_quick.center)
     window.update()
