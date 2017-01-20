@@ -8,6 +8,19 @@ Documentation
 
 Go to https://pygame-quick.rtfd.io.
 
+Requirements
+------------
+
+Either:
+
+ - Python 3.4+
+ 
+ Or:
+ 
+  - Python 3
+  - [pathlib](https://pypi.python.org/pypi/pathlib)
+  - [enum34](https://pypi.python.org/pypi/enum34)
+
 Installation
 ------------
 
