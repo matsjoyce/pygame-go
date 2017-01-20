@@ -271,18 +271,21 @@ Make my name bold! And italic!
 
 Just like this::
 
-    image.draw_text(text="my name", color="black", position=image.topleft, italic=True, bold=True)
+    image.draw_text(text="my name", color="black", position=image.topleft,
+                    italic=True, bold=True)
 
 Note! This may not change anything unless you change the font as well. To use a different font, set it like this::
 
-    image.draw_text(text="my name", color="black", position=image.topleft, italic=True, bold=True, font="dejavusans")
+    image.draw_text(text="my name", color="black", position=image.topleft,
+                    italic=True, bold=True, font="dejavusans")
 
 Make my name BIGGER!
 --------------------
 
 OK, OK, here's font size 60::
 
-    image.draw_text(text="my name", color="black", position=image.topleft, italic=True, bold=True, font="dejavusans", size=60)
+    image.draw_text(text="my name", color="black", position=image.topleft,
+                    italic=True, bold=True, font="dejavusans", size=60)
 
 Ha! Show me how to put "YOU DIED!" in the middle of the window!
 ---------------------------------------------------------------
@@ -331,9 +334,9 @@ You can compare to any string you want. If you want to check for the "a" key, do
 
 Some special keys:
 
-====================== =============
+====================== =========================================
 If you are looking for Test for
-====================== =============
+====================== =========================================
 Return key             ``"\n"``
 Space bar              ``" "``
 Shift key              ``"<Shift>"``
@@ -343,10 +346,10 @@ Left arrow             ``"<Left>"``
 Right arrow            ``"<Right>"``
 Up arrow               ``"<Up>"``
 Down arrow             ``"<Down>"``
-Escape key             ``<Escape>``
-Delete key             ``<Delete>``
-Function X key         ``<FX>``
-====================== =============
+Escape key             ``"<Escape>"``
+Delete key             ``"<Delete>"``
+Function keys          ``"<F1>"``, ``"<F2>"``, ..., ``"<F12>"``
+====================== =========================================
 
 How about if they press the mouse?
 ----------------------------------
