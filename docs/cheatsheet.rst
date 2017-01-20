@@ -130,15 +130,19 @@ For the align you can pick from::
 Can I make my face bigger?
 --------------------------
 
-Just use `image.scale`. If you want it twice as big::
+Just use ``image.scale``. If you want it twice as big::
 
     face.scale(2)
+
+Or you want it twice as small::
+
+    face.scale(0.5)
 
 You can also rotate it (clockwise)::
 
     face.rotate(90)
 
-Any flip it::
+And flip it::
 
     face.flip(vertical=True, horizontal=True)
 
