@@ -276,9 +276,9 @@ You can compare to any string you want. If you want to check for the "a" key, do
 
 Some special keys:
 
-====================== ==========
+====================== =============
 If you are looking for Test for
-====================== ==========
+====================== =============
 Return key             ``"\n"``
 Space bar              ``" "``
 Shift key              ``"<Shift>"``
@@ -288,7 +288,10 @@ Left arrow             ``"<Left>"``
 Right arrow            ``"<Right>"``
 Up arrow               ``"<Up>"``
 Down arrow             ``"<Down>"``
-====================== ==========
+Escape key             ``<Escape>``
+Delete key             ``<Delete>``
+Function X key         ``<FX>``
+====================== =============
 
 How about if they press the mouse?
 ----------------------------------

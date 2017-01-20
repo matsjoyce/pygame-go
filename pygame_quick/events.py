@@ -91,6 +91,12 @@ def translate_button(button):
         return Button.horizontal_scroll, HorizontalScrollDirection.right
 
 
+FUNCTION_KEYS = [pygame.K_F1, pygame.K_F2, pygame.K_F3,
+                 pygame.K_F4, pygame.K_F5, pygame.K_F6,
+                 pygame.K_F7, pygame.K_F8, pygame.K_F9,
+                 pygame.K_F10, pygame.K_F11, pygame.K_F12]
+
+
 def expand_event(event):
     if event.type == pygame.QUIT:
         return EventType.quit, None
@@ -98,8 +104,6 @@ def expand_event(event):
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_RETURN:
             key_value = "\n"  # pygame uses "\r", which is less pythonic
-        elif event.unicode:
-            key_value = event.unicode
         elif event.key in (pygame.K_LSHIFT, pygame.K_RSHIFT):
             key_value = "<Shift>"
         elif event.key in (pygame.K_LALT, pygame.K_RALT):
@@ -118,6 +122,38 @@ def expand_event(event):
             key_value = "<Up>"
         elif event.key == pygame.K_DOWN:
             key_value = "<Down>"
+        elif event.key == pygame.K_ESCAPE:
+            key_value = "<Escape>"
+        elif event.key == pygame.K_INSERT:
+            key_value = "<Insert>"
+        elif event.key == pygame.K_PAGEUP:
+            key_value = "<PageUp>"
+        elif event.key == pygame.K_PAGEDOWN:
+            key_value = "<PageDown>"
+        elif event.key == pygame.K_DELETE:
+            key_value = "<Delete>"
+        elif event.key == pygame.K_HOME:
+            key_value = "<Home>"
+        elif event.key == pygame.K_PRINT:
+            key_value = "<PrintScreen>"
+        elif event.key == pygame.K_END:
+            key_value = "<End>"
+        elif event.key == pygame.K_SCROLLOCK:
+            key_value = "<ScrollLock>"
+        elif event.key == pygame.K_BREAK:
+            key_value = "<Break>"
+        elif event.key == pygame.K_PAUSE:
+            key_value = "<Pause>"
+        elif event.key == pygame.K_SYSREQ:
+            key_value = "<SysReq>"
+        elif event.key == pygame.K_MENU:
+            key_value = "<Menu>"
+        elif event.key == pygame.K_HELP:
+            key_value = "<Help>"
+        elif event.key in FUNCTION_KEYS:
+            key_value = "<F{}>".format(FUNCTION_KEYS.index(event.key) + 1)
+        elif event.unicode:
+            key_value = event.unicode
         else:
             return None, None
         return EventType.key_down, key_value
