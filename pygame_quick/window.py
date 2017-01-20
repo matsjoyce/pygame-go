@@ -79,3 +79,12 @@ class window(image.image):
                 yield self._events.pop(i)
             else:
                 i += 1
+
+    def flip(self, x=False, y=False):
+        raise RuntimeError("Cannot flip a window")
+
+    def rotate(self, angle):
+        raise RuntimeError("Cannot rotate a window")
+
+    def scale(self, times):
+        raise RuntimeError("Cannot scale a window")

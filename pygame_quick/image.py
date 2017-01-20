@@ -26,6 +26,7 @@ from .shortcuts import with_pygame_inited, with_display_inited
 from .shortcuts import extract_position_args, extract_position_kwargs
 from .shortcuts import extract_size_args, extract_size_kwargs
 from .shortcuts import extract_color_args, extract_color_kwargs
+from .shortcuts import check_position
 
 
 class Alignment(enum.Enum):
@@ -198,3 +199,12 @@ class image:
         y -= offset[1]
 
         self._image.blit(textimage, (x, y))
+
+    def flip(self, vertical=False, horizontal=False):
+        self._image = pygame.transform.flip(self._image, horizontal, vertical)
+
+    def rotate(self, angle):
+        self._image = pygame.transform.rotate(self._image, -(angle % 360))
+
+    def scale(self, times):
+        self._image = pygame.transform.smoothscale(self._image, (self.width * times, self.height * times))

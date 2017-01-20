@@ -127,6 +127,23 @@ For the align you can pick from::
     pgq.bottomleft
     pgq.bottomright
 
+Can I make my face bigger?
+--------------------------
+
+Just use `image.scale`. If you want it twice as big::
+
+    face.scale(2)
+
+You can also rotate it (clockwise)::
+
+    face.rotate(90)
+
+Any flip it::
+
+    face.flip(vertical=True, horizontal=True)
+
+``vertical=True`` means that the image is reflected along the x-axis and ``horizontal=True`` means that the image is reflected along the y-axis.
+
 But the black background is still there! I want it green!
 ---------------------------------------------------------
 
