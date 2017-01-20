@@ -416,9 +416,9 @@ I made a snake program, and the snake went really fast!
 
 When you create your window, you can change how fast it updates::
 
-    window = pgq.window(WINDOW_SIZE, framerate=5)
+    window = pgq.window(WINDOW_SIZE, frame_rate=5)
 
-``framerate`` is normally 20. You can make it smaller to slow the game down or larger to speed it up.
+``frame_rate`` is normally 20. You can make it smaller to slow the game down or larger to speed it up.
 
 Can I tell which frame I am on?
 -------------------------------
@@ -429,7 +429,7 @@ Look at ``window.frame_number``::
 
 You can use this like a timer, but it will not be very accurate::
 
-    print("Game playing for", window.frame_number / window.framerate)
+    print("Game playing for", window.frame_number / window.frame_rate)
 
 How can I stop the game when the player looses?
 -----------------------------------------------

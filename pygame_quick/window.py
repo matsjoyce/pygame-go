@@ -24,13 +24,13 @@ from .shortcuts import with_pygame_inited, extract_size_args
 
 class window(image.image):
     @with_pygame_inited
-    def __init__(self, *args, framerate=20, autoquit=True, title="pygame-quick", icon=None, **kwargs):
+    def __init__(self, *args, frame_rate=20, autoquit=True, title="pygame-quick", icon=None, **kwargs):
         size = extract_size_args(args, kwargs)
         if pygame.display.get_surface():
             raise RuntimeError("You can only create one window!")
         self.icon = icon
         self._image = pygame.display.set_mode(size)
-        self.framerate = framerate
+        self.frame_rate = frame_rate
         self._clock = pygame.time.Clock()
         self._active = True
         self._events = []
@@ -46,7 +46,7 @@ class window(image.image):
 
     def update(self):
         pygame.display.flip()
-        self._clock.tick(self.framerate)
+        self._clock.tick(self.frame_rate)
         self.frame_number += 1
         self._preprocess_events()
 

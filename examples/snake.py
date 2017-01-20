@@ -24,7 +24,7 @@ import random
 
 SNAKE_SIZE = 20
 
-window = pgq.window(600, 400, framerate=5)
+window = pgq.window(600, 400, frame_rate=5)
 
 cx, cy = window.center
 snake_dx, snake_dy = 0, SNAKE_SIZE
