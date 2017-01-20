@@ -33,23 +33,18 @@ snake_parts = [(cx, cy - SNAKE_SIZE * i) for i in range(3)]
 food_location = (random.randrange(window.width // SNAKE_SIZE) * SNAKE_SIZE,
                  random.randrange(window.height // SNAKE_SIZE) * SNAKE_SIZE)
 
-head_image = pgq.image(SNAKE_SIZE, SNAKE_SIZE)
-head_image.fill("white")
+head_image = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="white")
 head_image.draw_circle(position=head_image.center, radius=2, color="black")
 head_image.draw_hollow_rect(position=head_image.topleft, size=head_image.size, color="black")
 
-tail_image_even = pgq.image(SNAKE_SIZE, SNAKE_SIZE)
-tail_image_even.fill("yellow")
-
-tail_image_odd = pgq.image(SNAKE_SIZE, SNAKE_SIZE)
-tail_image_odd.fill("green")
-
-food_image = pgq.image(SNAKE_SIZE, SNAKE_SIZE)
-food_image.fill("red")
+tail_image_even = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="yellow")
+tail_image_odd = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="green")
+food_image = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="red")
 
 while window.active():
     window.fill("white")
     if snake_dead:
+        window.draw_text(text="Score: {}".format(len(snake_parts) - 3), position=window.topleft, color="black")
         window.draw_text(text="YOU DIED!", position=window.center, color="red", size=60, align=pgq.center)
         window.update()
         continue
@@ -86,4 +81,5 @@ while window.active():
         else:
             tail_image_even.draw(window, part)
     food_image.draw(window, food_location)
+    window.draw_text(text="Score: {}".format(len(snake_parts) - 3), position=window.topleft, color="black")
     window.update()
