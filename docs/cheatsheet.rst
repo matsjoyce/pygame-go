@@ -398,7 +398,7 @@ What about if they move the mouse?
 Test for ``pgq.mouse_motion``::
 
     if type is pgq.mouse_motion:
-        print("You moved the mouse from", value.from_position, "to", value.to_position)
+        print("You moved the mouse from", value.start_position, "to", value.end_position)
 
 You can also see how much the mouse moved::
 

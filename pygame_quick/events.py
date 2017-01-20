@@ -61,13 +61,13 @@ class MouseEvent:
 
 class MouseMotionEvent:
     def __init__(self, pos, rel, buttons):
-        self.to_position = pos
-        self.to_x, self.to_y = pos
+        self.end_position = pos
+        self.end_x, self.end_y = pos
         self.moved_by = rel
         self.moved_by_x, self.moved_by_y = rel
-        self.from_x = self.to_x - self.moved_by_x
-        self.from_y = self.to_y - self.moved_by_y
-        self.from_position = self.from_x, self.from_y
+        self.start_x = self.end_x - self.moved_by_x
+        self.start_y = self.end_y - self.moved_by_y
+        self.start_position = self.start_x, self.start_y
         self.buttons = buttons
 
     def is_pressed(self, button):

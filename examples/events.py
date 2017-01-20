@@ -36,7 +36,7 @@ while window.active():
                 print("Mouse scroll at", value.position, "using direction", value.scroll_direction)
 
         elif type is pygame_quick.mouse_motion:
-            print("Mouse moved from", value.from_position, "to", value.to_position)
+            print("Mouse moved from", value.start_position, "to", value.end_position)
 
         elif type is pygame_quick.key_down:
             print("Key", repr(value), "pressed")
