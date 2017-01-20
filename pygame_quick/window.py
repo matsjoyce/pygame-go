@@ -53,7 +53,6 @@ class window(image.image):
             self.update()
 
     def _preprocess_events(self):
-        self._events.clear()
         for event in pygame.event.get():
             type, info = events.expand_event(event)
             if type == events.EventType.quit and self._autoquit:
@@ -71,14 +70,9 @@ class window(image.image):
             return self._events.pop(0)
         raise ValueError("There are no more events")
 
-    def events(self, *types):
-        i = 0
-        while i < len(self._events):
-            type, value = self._events[i]
-            if type in types or not types:
-                yield self._events.pop(i)
-            else:
-                i += 1
+    def events(self):
+        while self.has_events():
+            yield self.next_event()
 
     def flip(self, x=False, y=False):
         raise RuntimeError("Cannot flip a window")

@@ -77,8 +77,8 @@ while window.active():
     block4.draw(window, (50, 20))
     block4.draw(window, window.bottomright, align=pygame_quick.bottomright)
 
-    window.draw_text(text=str(window.framenumber), position=window.topleft, color=pygame_quick.color.black)
-    window.draw_text(text=str(window.framenumber), position=window.bottomright, color=pygame_quick.color.black,
+    window.draw_text(text=str(window.frame_number), position=window.topleft, color=pygame_quick.color.black)
+    window.draw_text(text=str(window.frame_number), position=window.bottomright, color=pygame_quick.color.black,
                      align=pygame_quick.bottomright)
 
     window.update()
