@@ -15,8 +15,8 @@ Either:
 
  - Python 3.4+
  
- Or:
- 
+Or:
+
   - Python 3
   - [pathlib](https://pypi.python.org/pypi/pathlib)
   - [enum34](https://pypi.python.org/pypi/enum34)
