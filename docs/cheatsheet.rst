@@ -200,7 +200,11 @@ You can also write it like::
 
     image.draw_rect(position=(10, 20), size=(50, 10), color=(0, 0, 255))
 
-But it is less clear that way.
+But it is less clear that way. You can use ``align`` with ``draw_rect``::
+
+    image.draw_rect(position=(10, 20), size=(50, 10), color="blue", align=pgq.bottomright)
+
+This means that ``position`` will be the bottom-right of the draw rectangle.
 
 A border! I want a blue rectangle with a yellow border!
 -------------------------------------------------------
@@ -216,6 +220,10 @@ Then draw your border::
 This will draw a border that is 1 pixel thick. Want a wider border? Let's say 5 pixels::
 
     image.draw_hollow_rect(x=10, y=20, width=50, height=10, color="blue", thickness=5)
+
+Using ``align``::
+
+    image.draw_hollow_rect(x=10, y=20, width=50, height=10, color="blue", thickness=5, align=pgq.bottomright)
 
 Yay! How about a circle? A black one!
 -------------------------------------

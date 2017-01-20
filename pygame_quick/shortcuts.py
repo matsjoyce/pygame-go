@@ -20,7 +20,7 @@ import functools
 import pygame
 import collections
 
-from . import color
+from . import color, image
 
 
 def with_pygame_inited(func=None):
@@ -145,3 +145,33 @@ def check_color(value):
         if not isinstance(v, (int, float)):
             raise RuntimeError("Color component must be a number, not {}".format(type(v)))
     return tuple(map(color.color_clamp, value))
+
+
+def translate_align(align, width, height):
+    if align is image.Alignment.center:
+        return width // 2, height // 2
+    elif align is image.Alignment.topleft:
+        return 0, 0
+    elif align is image.Alignment.topright:
+        return width, 0
+    elif align is image.Alignment.bottomleft:
+        return 0, height
+    elif align is image.Alignment.bottomright:
+        return width, height
+
+
+def extract_align_kwargs(kwargs, size, single_name="align", multi_names=("align_x", "align_y")):
+    if "align" in kwargs:
+        if "align_x" in kwargs:
+            raise TypeError("You can only give align or align_x and align_y, not both!")
+        if kwargs["align"] in image.Alignment:
+            return translate_align(kwargs.pop("align"), *size)
+        else:
+            return check_position(kwargs.pop("align"))
+    elif "align_x" in kwargs or "align_y" in kwargs:
+        if "align_x" in kwargs and "align_y" in kwargs:
+            return check_position((kwargs.pop("align_x"), kwargs.pop("align_y")))
+        else:
+            raise TypeError("You must give both align_x and align_y, or neither!")
+    else:
+        return 0, 0
