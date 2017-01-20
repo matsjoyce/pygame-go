@@ -47,6 +47,26 @@ If you do not need to do any new drawing for each frame, you can write is like t
 
     window.loop_forever()
 
+Why is the window always called "pygame-quick"? I want to call it "MY EPIC THING"!
+----------------------------------------------------------------------------------
+
+Do this::
+
+    window = pgq.window(size=WINDOW_SIZE, title="MY EPIC THING")
+
+You can also do this::
+
+    window.title = "MY EPIC THING"
+
+If you want to set the icon::
+
+    window = pgq.window(size=WINDOW_SIZE, icon=image)
+
+Or::
+
+    window.icon = image
+
+``image`` can be any image you want.
 
 But how do I draw stuff? That black screen is boring!
 -----------------------------------------------------
