@@ -15,15 +15,29 @@ class sound:
             self._sound = pygame.mixer.Sound(str(path))
         except pygame.error:
             raise IOError("Could not load '{}', are you sure it's an sound file (.ogg or .wav)?".format(path))
+        self._channels = []
+
+    def is_playing(self):
+        playing = False
+        new_channels = []
+        for channel in self._channels:
+            if channel.get_sound() == self._sound:
+                playing = True
+                new_channels.append(channel)
+        self._channels = new_channels
+        return playing
 
     def play(self, times=1, forever=False):
         if forever:
-            self._sound.play(-1)
+            channel = self._sound.play(-1)
         else:
-            self._sound.play(times - 1)
+            channel = self._sound.play(times - 1)
+        self._channels.append(channel)
+        self.is_playing()
 
     def stop(self):
         self._sound.stop()
+        self.is_playing()
 
     @property
     def volume(self):

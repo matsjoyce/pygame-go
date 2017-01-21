@@ -468,6 +468,15 @@ Play it using::
 
     explosion.play()
 
+To stop playing::
+
+    explosion.stop()
+
+You can check if the sound is currently playing::
+
+    if explosion.is_playing():
+        print("BOOM!")
+
 To set the volume of the sound at 50%::
 
     explosion.volume = 0.5
@@ -490,6 +499,6 @@ Simply::
 
     explosion.play(forever=True)
 
-You can make it stop by calling::
+The sound will only stop if you call (or play too many sounds at once)::
 
     explosion.stop()
