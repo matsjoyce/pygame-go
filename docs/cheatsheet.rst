@@ -492,6 +492,22 @@ Yup. To make it repeat 10 times, use::
 
     explosion.play(times=10)
 
+And pause?
+----------
+
+Use::
+
+    explosion.pause()
+
+To unpause::
+
+    explosion.unpause()
+
+To check is the sound is paused, use::
+
+    if explosion.is_paused():
+        print("Paused")
+
 Really last thing. How can I make it repeat FOREVER!
 ----------------------------------------------------
 
