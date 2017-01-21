@@ -63,13 +63,13 @@ class window(image.image):
 
     def _preprocess_events(self):
         for event in pygame.event.get():
-            type, info = events.expand_event(event)
-            if type == events.EventType.quit and self._autoquit:
-                self.stop()
-            elif type is None:
+            event = events.expand_event(event)
+            if event is None:
                 continue
+            elif event.is_quit() and self._autoquit:
+                self.stop()
             else:
-                self._events.append((type, info))
+                self._events.append(event)
 
     def has_events(self):
         return bool(self._events)

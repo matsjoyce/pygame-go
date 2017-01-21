@@ -49,18 +49,20 @@ while window.active():
         window.update()
         continue
 
-    for _, key in window.events():
-        if key == "<Left>" and snake_dx != SNAKE_SIZE:
-            snake_dx, snake_dy = -SNAKE_SIZE, 0
-        elif key == "<Right>" and snake_dx != -SNAKE_SIZE:
-            snake_dx, snake_dy = SNAKE_SIZE, 0
-        elif key == "<Up>" and snake_dy != SNAKE_SIZE:
-            snake_dx, snake_dy = 0, -SNAKE_SIZE
-        elif key == "<Down>" and snake_dy != -SNAKE_SIZE:
-            snake_dx, snake_dy = 0, SNAKE_SIZE
-        else:
-            continue
-        break
+    for event in window.events():
+        print(event)
+        if event.is_key():
+            if event.key == "<Left>" and snake_dx != SNAKE_SIZE:
+                snake_dx, snake_dy = -SNAKE_SIZE, 0
+            elif event.key == "<Right>" and snake_dx != -SNAKE_SIZE:
+                snake_dx, snake_dy = SNAKE_SIZE, 0
+            elif event.key == "<Up>" and snake_dy != SNAKE_SIZE:
+                snake_dx, snake_dy = 0, -SNAKE_SIZE
+            elif event.key == "<Down>" and snake_dy != -SNAKE_SIZE:
+                snake_dx, snake_dy = 0, SNAKE_SIZE
+            else:
+                continue
+            break
 
     head_x, head_y = snake_parts[0]
     head_x = (head_x + snake_dx) % window.width

@@ -60,25 +60,25 @@ while window.active():
             if number_of_neighbours == 3 or number_of_neighbours == 2 and (x, y) in old_cells:
                 cells.add((x, y))
 
-    for type, value in window.events():
-        if type is pgq.mouse_down and value.button is pgq.left_button:
-            block = point_to_block(*value.position)
+    for event in window.events():
+        if event.is_mouse_press() and event.button is pgq.left_button:
+            block = point_to_block(*event.position)
             if block in cells:
                 cells.remove(block)
             else:
                 cells.add(block)
-        elif type is pgq.key_down:
-            if value == " ":
+        elif event.is_key():
+            if event.key == " ":
                 paused = not paused
-            elif value in "+=":
+            elif event.key in ("+", "="):
                 block_size += 1
-            elif value == "-":
+            elif event.key == "-":
                 block_size = max(4, block_size - 1)
-            elif value == "c":
+            elif event.key == "c":
                 cells.clear()
-        if type is pgq.mouse_motion and value.is_pressed(pgq.left_button):
-            cells.add(point_to_block(*value.start))
-            cells.add(point_to_block(*value.end))
+        if event.is_mouse_motion() and event.is_pressed(pgq.left_button):
+            cells.add(point_to_block(*event.start))
+            cells.add(point_to_block(*event.end))
 
     blocks_x, blocks_y = window.width // block_size, window.width // block_size
 

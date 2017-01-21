@@ -38,30 +38,32 @@ block4 = pygame_quick.image(10, 100)
 block4.fill("tomato")
 
 while window.active():
-    for type, value in window.events():
-        if type is pygame_quick.mouse_down:
-            if value.button is pygame_quick.left_button:
-                print("Mouse click at", value.position, "using left button")
-            elif value.button is pygame_quick.right_button:
-                print("Mouse click at", value.position, "using right button")
-            elif value.button is pygame_quick.middle_button:
-                print("Mouse click at", value.position, "using middle button")
-            elif value.is_scroll():
-                print("Mouse scroll at", value.position, "using direction", value.scroll_direction)
+    for event in window.events():
+        print(repr(event))
+        if event.is_mouse_press():
+            if event.button is pygame_quick.left_button:
+                print("Mouse click at", event.position, "using left button")
+            elif event.button is pygame_quick.right_button:
+                print("Mouse click at", event.position, "using right button")
+            elif event.button is pygame_quick.middle_button:
+                print("Mouse click at", event.position, "using middle button")
 
-        elif type is pygame_quick.key_down:
-            if value == "<Left>":
+        elif event.is_mouse_scroll():
+            print("Mouse scroll at", event.position, "using direction", event.direction)
+
+        elif event.is_key():
+            if event.key == "<Left>":
                 block_x -= 1
-            elif value == "<Right>":
+            elif event.key == "<Right>":
                 block_x += 1
-            elif value == "<Up>":
+            elif event.key == "<Up>":
                 block_y -= 1
-            elif value == "<Down>":
+            elif event.key == "<Down>":
                 block_y += 1
-            elif value == "b":
+            elif event.key == "b":
                 background_color = random.choice(list(pygame_quick.color.colors))
             else:
-                print("Key", repr(value), "pressed")
+                print("Key", repr(event.key), "pressed")
 
     window.fill(background_color)
 

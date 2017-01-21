@@ -37,10 +37,9 @@ while window.active():
             new_bullets.append((x, y - 10))
     bullets = new_bullets
 
-    for type, value in window.events():
-        if type is pygame_quick.key_down and value == " ":
-            bullet_x, _ = pygame_quick.mouse_position()
-            bullets.append((bullet_x, window.height))
+    if pygame_quick.is_key_pressed(" "):
+        bullet_x, _ = pygame_quick.mouse_position()
+        bullets.append((bullet_x, window.height))
 
     for bullet_position in bullets:
         window.draw_image(bullet, bullet_position, align=pygame_quick.center)

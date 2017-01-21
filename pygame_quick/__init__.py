@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .window import window
 from .image import image, Alignment
-from .events import EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
+from .events import EventType, Button, ScrollDirection, ScrollDirection
 from .input import mouse_position, set_mouse_position, is_key_pressed, is_mouse_pressed
 from .color import color, initialise_colors
 from .sound import sound
@@ -35,11 +35,10 @@ def extract_values(enum, suffix, scope):
 # provide shortcuts to the enum values
 extract_values(EventType, "", locals())
 extract_values(Button, "_button", locals())
-extract_values(VerticalScrollDirection, "_scroll", locals())
-extract_values(HorizontalScrollDirection, "_scroll", locals())
+extract_values(ScrollDirection, "_scroll", locals())
 extract_values(Alignment, "", locals())
 
 # Leave module level as clean as possible
 
 del extract_values, initialise_colors
-del EventType, Button, VerticalScrollDirection, HorizontalScrollDirection, Alignment
+del EventType, Button, ScrollDirection, Alignment

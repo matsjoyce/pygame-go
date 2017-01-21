@@ -317,27 +317,27 @@ My program doesn't do much. How can I check if a key is pressed?
 Modify your loop to look like this::
 
     while window.active():
-        for type, value in window.events():
+        for event in window.events():
             # handle events here
         # drawing here
         window.update()
 
 To check for a key press, replace ``# handle events here`` with::
 
-    if type is pgq.key_down:
-        print("You pressed", value)
+    if event.is_key():
+        print("You pressed", event.key)
 
 I just want to check for the space bar, not everything!
 -------------------------------------------------------
 
 Do this::
 
-    if type is pgq.key_down and value == " ":
+    if event.is_key() and event.key == " ":
         print("You pressed the space bar")
 
 You can compare to any string you want. If you want to check for the "a" key, do::
 
-    if type is pgq.key_down and value == "a":
+    if event.is_key() and event.key == "a":
         print("You pressed the a key")
 
 Some special keys:
@@ -362,38 +362,38 @@ Function keys          ``"<F1>"``, ``"<F2>"``, ..., ``"<F12>"``
 How about if they press the mouse?
 ----------------------------------
 
-You can check for ``pgq.mouse_down``. If you only want clicks, test like this::
+You can do this::
 
-    if type is pgq.mouse_down and value.is_click():
-        print("You clicked a mouse button at", value.x, value.y)
+    if event.is_mouse_click():
+        print("You clicked a mouse button at", event.x, event.y)
 
 What about just the left mouse button?
 --------------------------------------
 
 For the left button::
 
-    if type is pgq.mouse_down and value.button is pgq.left_button:
-        print("You clicked the left mouse button at", value.position)
+    if event.is_mouse_click() and event.button is pgq.left_button:
+        print("You clicked the left mouse button at", event.position)
 
 Right button::
 
-    if type is pgq.mouse_down and value.button is pgq.right_button:
-        print("You clicked the right mouse button at", value.position)
+    if event.is_mouse_click() and event.button is pgq.right_button:
+        print("You clicked the right mouse button at", event.position)
 
 Middle button::
 
-    if type is pgq.mouse_down and value.button is pgq.middle_button:
-        print("You clicked the middle mouse button at", value.position)
+    if event.is_mouse_click() and event.button is pgq.middle_button:
+        print("You clicked the middle mouse button at", event.position)
 
 Scrolling! What about that?
 ---------------------------
 
 Do this::
 
-    if type is pgq.mouse_down and value.is_scroll():
-        print("You scrolled", value.scroll_direction, "at", position)
+    if event.is_scroll():
+        print("You scrolled", event.direction, "at", position)
 
-``value.direction`` will be one of::
+``event.direction`` will be one of::
 
     pgq.up_scroll
     pgq.down_scroll
@@ -403,23 +403,23 @@ Do this::
 What about if they move the mouse?
 ----------------------------------
 
-Test for ``pgq.mouse_motion``::
+Write your code like this::
 
-    if type is pgq.mouse_motion:
-        print("You moved the mouse from", value.start, "to", value.end)
+    if event.is_mouse_motion():
+        print("You moved the mouse from", event.start, "to", event.end)
 
 You can also see how much the mouse moved::
 
-    if type is pgq.mouse_motion:
-        print("You moved the mouse by", value.moved_by_x, value.moved_by_y)
+    if event.is_mouse_motion():
+        print("You moved the mouse by", event.moved_by_x, event.moved_by_y)
 
-If you want to see if any buttons were pressed during the movement, test them using ``value.is_pressed``::
+If you want to see if any buttons were pressed during the movement, test them using ``event.is_pressed``::
 
-    if value.is_pressed(pgq.left_button):
+    if event.is_pressed(pgq.left_button):
         print("Drag with left button")
-    elif value.is_pressed(pgq.right_button):
+    elif event.is_pressed(pgq.right_button):
         print("Drag with right button")
-    elif value.is_pressed(pgq.middle_button):
+    elif event.is_pressed(pgq.middle_button):
         print("Drag with middle button")
 
 Just tell me where the mouse is now!

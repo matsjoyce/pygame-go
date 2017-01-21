@@ -24,21 +24,22 @@ import pygame_quick
 window = pygame_quick.window(600, 400)
 
 while window.active():
-    for type, value in window.events():
-        if type is pygame_quick.mouse_down:
-            if value.button is pygame_quick.left_button:
-                print("Mouse click at", value.position, "using left button")
-            elif value.button is pygame_quick.right_button:
-                print("Mouse click at", value.position, "using right button")
-            elif value.button is pygame_quick.middle_button:
-                print("Mouse click at", value.position, "using middle button")
-            elif value.is_scroll():
-                print("Mouse scroll at", value.position, "using direction", value.scroll_direction)
+    for event in window.events():
+        if event.is_mouse_press():
+            if event.button is pygame_quick.left_button:
+                print("Mouse click at", event.position, "using left button")
+            elif event.button is pygame_quick.right_button:
+                print("Mouse click at", event.position, "using right button")
+            elif event.button is pygame_quick.middle_button:
+                print("Mouse click at", event.position, "using middle button")
 
-        elif type is pygame_quick.mouse_motion:
-            print("Mouse moved from", value.start, "to", value.end)
+        elif event.is_mouse_scroll():
+            print("Mouse scroll at", event.position, "using direction", event.direction)
 
-        elif type is pygame_quick.key_down:
-            print("Key", repr(value), "pressed")
+        elif event.is_mouse_motion():
+            print("Mouse moved from", event.start, "to", event.end)
+
+        elif event.is_key():
+            print("Key", repr(event.key), "pressed")
 
     window.update()
