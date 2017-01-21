@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import functools
 import pygame
-import collections
 
 from . import color, image
 

@@ -34,4 +34,3 @@ window.draw_circle(position=(500, 150), radius=80, color="green")
 window.draw_hollow_circle(position=(500, 150), radius=80, color="magenta", thickness=20)
 
 window.loop_forever()
-

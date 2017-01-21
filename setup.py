@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import pathlib
 from distutils.core import setup
 
 setup(name="pygame-quick",

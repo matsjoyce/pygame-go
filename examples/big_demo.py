@@ -69,13 +69,16 @@ while window.active():
     window.draw_hollow_rect(color="red", x=100, y=100, width=100, height=100, thickness=10)
 
     window.draw_rect(color="yellow", x=100, y=100, width=100, height=100, align=pygame_quick.topright)
-    window.draw_hollow_rect(color="green", x=100, y=100, width=100, height=100, thickness=10, align=pygame_quick.topright)
+    window.draw_hollow_rect(color="green", x=100, y=100, width=100, height=100,
+                            thickness=10, align=pygame_quick.topright)
 
     window.draw_rect(color="brown", x=100, y=100, width=100, height=100, align=pygame_quick.bottomleft)
-    window.draw_hollow_rect(color="blue", x=100, y=100, width=100, height=100, thickness=10, align=pygame_quick.bottomleft)
+    window.draw_hollow_rect(color="blue", x=100, y=100, width=100, height=100,
+                            thickness=10, align=pygame_quick.bottomleft)
 
     window.draw_rect(color="gray", x=100, y=100, width=100, height=100, align=pygame_quick.bottomright)
-    window.draw_hollow_rect(color="black", x=100, y=100, width=100, height=100, thickness=10, align=pygame_quick.bottomright)
+    window.draw_hollow_rect(color="black", x=100, y=100, width=100, height=100,
+                            thickness=10, align=pygame_quick.bottomright)
 
     window.draw_circle(color="green", x=500, y=300, radius=100)
 
@@ -93,4 +96,3 @@ while window.active():
                      align=pygame_quick.bottomright)
 
     window.update()
-

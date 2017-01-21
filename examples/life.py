@@ -41,14 +41,6 @@ def block_to_point(block_x, block_y):
     return x, y
 
 
-def toggle_point(point):
-    block = point_to_block(*point)
-    if block in cells:
-        cells.remove(block)
-    else:
-        cells.add(block)
-
-
 while window.active():
     if not paused:
         old_cells = cells
@@ -70,7 +62,11 @@ while window.active():
 
     for type, value in window.events():
         if type is pgq.mouse_down and value.button is pgq.left_button:
-            toggle_point(value.position)
+            block = point_to_block(*value.position)
+            if block in cells:
+                cells.remove(block)
+            else:
+                cells.add(block)
         elif type is pgq.key_down:
             if value == " ":
                 paused = not paused
@@ -81,8 +77,8 @@ while window.active():
             elif value == "c":
                 cells.clear()
         if type is pgq.mouse_motion and value.is_pressed(pgq.left_button):
-            toggle_point(value.start)
-            toggle_point(value.end)
+            cells.add(point_to_block(*value.start))
+            cells.add(point_to_block(*value.end))
 
     blocks_x, blocks_y = window.width // block_size, window.width // block_size
 
