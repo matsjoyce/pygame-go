@@ -1,5 +1,7 @@
-# pygame-quick
-A simplified version of pygame for use in teaching
+pygame-quick
+============
+
+A simplified version of PyGame for use in teaching
 
 [![Documentation Status](https://readthedocs.org/projects/pygame-quick/badge/?version=latest)](http://pygame-quick.readthedocs.io/en/latest/?badge=latest)
 
@@ -96,12 +98,12 @@ Go to https://pygame-quick.rtfd.io.
 Requirements
 ------------
 
- - [pygame](https://pypi.python.org/pypi/Pygame) (must be the python 3 version)
+ - [PyGame](https://pypi.python.org/pypi/Pygame) (must be the python 3 version)
 
 And either:
 
  - Python 3.4+
- 
+
 Or:
 
   - Python 3

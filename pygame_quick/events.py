@@ -113,7 +113,9 @@ class MouseMotionEvent:
         self.start = self.start_x, self.start_y
         self.buttons = buttons
 
-    def is_pressed(self, button):
+    def is_pressed(self, button=None):
+        if button is None:
+            return bool(self.buttons)
         return button in self.buttons
 
 
