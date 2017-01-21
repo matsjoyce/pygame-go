@@ -94,7 +94,7 @@ class color:
         except ValueError:
             return False
         else:
-            return other == self._color
+            return tuple(other) == tuple(self._color)
 
     colors = {}
 
