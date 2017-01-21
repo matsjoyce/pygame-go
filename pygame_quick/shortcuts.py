@@ -137,9 +137,13 @@ def check_color(value):
             proc.append(int(v) % 256)
         except (TypeError, ValueError):
             raise ValueError("Color component must be a number, not {}".format(type(v)))
-    if len(proc) not in (3, 4):
-        raise ValueError("Colors must have 3 or 4 components for RGBA")
-    return tuple(proc)
+    length = len(proc)
+    if length == 4:
+        return proc
+    elif length == 3:
+        proc.append(255)
+        return proc
+    raise ValueError("Colors must have 3 or 4 components for RGBA")
 
 
 def check_align(align, width, height):

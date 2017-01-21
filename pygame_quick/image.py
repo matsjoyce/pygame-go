@@ -22,6 +22,7 @@ import pathlib
 import pygame
 import os
 
+from . import color as color_mod
 from .shortcuts import with_pygame_inited, with_display_inited, ArgumentExtractor
 
 
@@ -228,3 +229,10 @@ class image:
 
     def scale(self, times):
         self._image = pygame.transform.smoothscale(self._image, (self.width * times, self.height * times))
+
+    def color_at(self, *args, **kwargs):
+        ae = ArgumentExtractor(kwargs)
+        x, y = ae.extract_position(args=args)
+        ae.finalize()
+
+        return color_mod.color(self._image.get_at((x, y)))

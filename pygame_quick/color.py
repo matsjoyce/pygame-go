@@ -88,6 +88,14 @@ class color:
             return "#" + ("{:02x}" * 3).format(*self._colors[:3])
         return "#" + ("{:02x}" * 4).format(*self._colors)
 
+    def __eq__(self, other):
+        try:
+            other = shortcuts.check_color(other)
+        except ValueError:
+            return False
+        else:
+            return other == self._color
+
     colors = {}
 
 
