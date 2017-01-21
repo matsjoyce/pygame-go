@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import pygame_quick as pgq
-import itertools
 
 block_size = 20
 

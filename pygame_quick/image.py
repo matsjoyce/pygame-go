@@ -17,16 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import enum
+import functools
 import pathlib
 import pygame
 import os
 
-from . import color, rendertext
-from .shortcuts import with_pygame_inited, with_display_inited
-from .shortcuts import extract_position_args, extract_position_kwargs
-from .shortcuts import extract_size_args, extract_size_kwargs
-from .shortcuts import extract_color_args, extract_color_kwargs
-from .shortcuts import check_position, extract_align_kwargs
+from .shortcuts import with_pygame_inited, with_display_inited, ArgumentExtractor
 
 
 class Alignment(enum.Enum):
@@ -52,13 +48,13 @@ class image:
                 raise IOError("Could not load '{}', are you sure it's an image?".format(path))
 
         else:
-            if "color" in kwargs or "r" in kwargs:
-                fill_with = extract_color_kwargs(kwargs)
-            else:
-                fill_with = None
-            size = extract_size_args(args, kwargs)
+            ae = ArgumentExtractor(kwargs)
+            size = ae.extract_size(args=args)
+            fill_with = ae.extract_color(default="")
+            ae.finalize()
+
             self._image = pygame.Surface(size, pygame.SRCALPHA)
-            if fill_with is not None:
+            if fill_with != "":
                 self.fill(fill_with)
 
     @classmethod
@@ -69,7 +65,10 @@ class image:
         return obj
 
     def fill(self, *args, **kwargs):
-        self._image.fill(extract_color_args(args, kwargs))
+        ae = ArgumentExtractor(kwargs)
+        color = ae.extract_color(args=args)
+        ae.finalize()
+        self._image.fill(color)
 
     def copy(self):
         return self.fromraw(self._image.copy())
@@ -108,24 +107,32 @@ class image:
         return self.size
 
     def draw_image(self, image, *args, **kwargs):
-        ox, oy = extract_align_kwargs(kwargs, image._image.get_size())
-        x, y = extract_position_args(args, kwargs)
+        ae = ArgumentExtractor(kwargs)
+        x, y = ae.extract_position(args=args)
+        ox, oy = ae.extract_align(checker_args=image._image.get_size())
+        ae.finalize()
 
         self._image.blit(image._image, (x - ox, y - oy))
 
     def draw_rect(self, **kwargs):
-        x, y = extract_position_kwargs(kwargs)
-        width, height = extract_size_kwargs(kwargs)
-        color = extract_color_kwargs(kwargs)
-        ox, oy = extract_align_kwargs(kwargs, (width, height))
+        ae = ArgumentExtractor(kwargs)
+        x, y = ae.extract_position()
+        width, height = ae.extract_size()
+        color = ae.extract_color()
+        ox, oy = ae.extract_align(checker_args=(width, height))
+        ae.finalize()
+
         pygame.draw.rect(self._image, color, (x - ox, y - oy, width, height))
 
     def draw_hollow_rect(self, *, thickness=1, **kwargs):
         # make consistent with draw_hollow_circle
-        color = extract_color_kwargs(kwargs)
-        x, y = extract_position_kwargs(kwargs)
-        width, height = extract_size_kwargs(kwargs)
-        ox, oy = extract_align_kwargs(kwargs, (width, height))
+        ae = ArgumentExtractor(kwargs)
+        x, y = ae.extract_position()
+        width, height = ae.extract_size()
+        color = ae.extract_color()
+        ox, oy = ae.extract_align(checker_args=(width, height))
+        ae.finalize()
+
         x -= ox
         y -= oy
         pygame.draw.rect(self._image, color, (x, y, thickness, height))
@@ -138,30 +145,53 @@ class image:
             pygame.draw.line(self._image, color, (x, y + height - 1), (x + width - 1, y + height - 1))
 
     def draw_circle(self, *, radius, **kwargs):
-        position = extract_position_kwargs(kwargs)
-        color = extract_color_kwargs(kwargs)
+        ae = ArgumentExtractor(kwargs)
+        position = ae.extract_position()
+        color = ae.extract_color()
+        ae.finalize()
+
         pygame.draw.circle(self._image, color, position, radius)
 
     def draw_hollow_circle(self, *, radius, thickness=1, **kwargs):
-        position = extract_position_kwargs(kwargs)
-        color = extract_color_kwargs(kwargs)
+        ae = ArgumentExtractor(kwargs)
+        position = ae.extract_position()
+        color = ae.extract_color()
+        ae.finalize()
+
         pygame.draw.circle(self._image, color, position, radius, thickness)
 
     def draw_line(self, *, thickness=1, **kwargs):
-        color = extract_color_kwargs(kwargs)
-        start = extract_position_kwargs(kwargs, "start", ("start_x", "start_y"))
-        end = extract_position_kwargs(kwargs, "end", ("end_x", "end_y"))
+        ae = ArgumentExtractor(kwargs)
+        start = ae.extract_position("start", ("start_x", "start_y"))
+        end = ae.extract_position("end", ("end_x", "end_y"))
+        color = ae.extract_color()
+        ae.finalize()
+
         pygame.draw.line(self._image, color, start, end, thickness)
+
+    @with_pygame_inited
+    @functools.lru_cache(None)
+    def _all_fonts():
+        return pygame.font.get_fonts()
 
     def draw_text(self, *, text, size=30, font=None, bold=False, italic=False, **kwargs):
         if "\n" in text:
             raise TypeError("Cannot render newlines")
 
-        color = extract_color_kwargs(kwargs)
-        font = rendertext.get_font(size, font, bold, italic)
+        if font is None:
+            fname = pygame.font.get_default_font()
+        elif font not in self._all_fonts():
+            raise ValueError("Unknown font, choose from {}".format(", ".join(self._all_fonts())))
+        else:
+            fname = pygame.font.match_font(font, bold, italic)
+        font = pygame.font.Font(fname, size)
+
+        ae = ArgumentExtractor(kwargs)
+        color = ae.extract_color()
         textimage = font.render(text, True, color)
-        ox, oy = extract_align_kwargs(kwargs, textimage.get_size())
-        x, y = extract_position_kwargs(kwargs)
+        ox, oy = ae.extract_align(checker_args=textimage.get_size())
+        x, y = ae.extract_position()
+        ae.finalize()
 
         self._image.blit(textimage, (x - ox, y - oy))
 

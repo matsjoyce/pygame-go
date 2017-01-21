@@ -20,9 +20,10 @@ from .window import window
 from .image import image, Alignment
 from .events import EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
 from .input import mouse_position, set_mouse_position, is_key_pressed, is_mouse_pressed
-from .color import color
+from .color import color, initialise_colors
 from .sound import sound
 
+initialise_colors()
 color_names = list(color.colors)
 
 
@@ -40,5 +41,5 @@ extract_values(Alignment, "", locals())
 
 # Leave module level as clean as possible
 
-del extract_values
+del extract_values, initialise_colors
 del EventType, Button, VerticalScrollDirection, HorizontalScrollDirection, Alignment

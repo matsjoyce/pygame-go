@@ -1,6 +1,6 @@
 """
 ball_bounce.py
-========
+==============
 Bounce a ball around the screen. Compare this to ball_bounce_plain_pygame.py
 
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)

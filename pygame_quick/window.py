@@ -19,18 +19,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import pygame
 
 from . import image, events
-from .shortcuts import with_pygame_inited, extract_size_args, extract_color_kwargs
+from .shortcuts import with_pygame_inited, ArgumentExtractor
 
 
 class window(image.image):
     @with_pygame_inited
     def __init__(self, *args, frame_rate=20, autoquit=True, title="pygame-quick", icon=None, **kwargs):
-        if "color" in kwargs or "r" in kwargs:
-            fill_with = extract_color_kwargs(kwargs)
-        else:
-            fill_with = "white"
+        ae = ArgumentExtractor(kwargs)
+        size = ae.extract_size(args=args)
+        fill_with = ae.extract_color(default="white")
+        ae.finalize()
 
-        size = extract_size_args(args, kwargs)
         if pygame.display.get_surface():
             raise RuntimeError("You can only create one window!")
         self.icon = icon

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygame
 
-from .shortcuts import with_pygame_inited, extract_position_args
+from .shortcuts import with_pygame_inited, ArgumentExtractor
 from . import events
 
 
@@ -29,7 +29,10 @@ def mouse_position():
 
 @with_pygame_inited
 def set_mouse_position(*args, **kwargs):
-    pygame.mouse.set_pos(extract_position_args(args, kwargs))
+    ae = ArgumentExtractor(kwargs)
+    pos = ae.extract_position(args=args)
+    ae.finalize()
+    pygame.mouse.set_pos(pos)
 
 
 @with_pygame_inited

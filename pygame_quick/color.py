@@ -18,12 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygame
 
-from .shortcuts import color_clamp, extract_color_args
+from . import shortcuts
+
+
+def color_clamp(value):
+    return int(value) % 256
 
 
 class color:
     def __init__(self, *args, **kwargs):
-        self._color = extract_color_args(args, kwargs)
+        ae = shortcuts.ArgumentExtractor(kwargs)
+        self._color = ae.extract_color(args=args)
+        ae.finalize()
 
     @classmethod
     def fromhex(cls, value):
@@ -85,7 +91,8 @@ class color:
     colors = {}
 
 
-for name, values in pygame.colordict.THECOLORS.items():
-    c = color(values)
-    setattr(color, name, c)
-    color.colors[name] = c
+def initialise_colors():
+    for name, values in pygame.colordict.THECOLORS.items():
+        c = color(values)
+        setattr(color, name, c)
+        color.colors[name] = c
