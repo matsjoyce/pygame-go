@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from .window import window
 from .image import image, Alignment
 from .events import EventType, Button, VerticalScrollDirection, HorizontalScrollDirection
-from .input import mouse_position, set_mouse_position
+from .input import mouse_position, set_mouse_position, is_key_pressed, is_mouse_pressed
 from .color import color
 from .sound import sound
 

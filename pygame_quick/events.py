@@ -19,6 +19,49 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import enum
 import pygame
 
+KEY_MAPPING = {pygame.K_RETURN: "\n",
+               pygame.K_LSHIFT: "<Shift>",
+               pygame.K_RSHIFT: "<Shift>",
+               pygame.K_LALT: "<Alt>",
+               pygame.K_RALT: "<Alt>",
+               pygame.K_LCTRL: "<Ctrl>",
+               pygame.K_RCTRL: "<Ctrl>",
+               pygame.K_LSUPER: "<Super>",
+               pygame.K_RSUPER: "<Super>",
+               pygame.K_LMETA: "<Meta>",
+               pygame.K_RMETA: "<Meta>",
+               pygame.K_LEFT: "<Left>",
+               pygame.K_RIGHT: "<Right>",
+               pygame.K_UP: "<Up>",
+               pygame.K_DOWN: "<Down>",
+               pygame.K_ESCAPE: "<Escape>",
+               pygame.K_INSERT: "<Insert>",
+               pygame.K_PAGEUP: "<PageUp>",
+               pygame.K_PAGEDOWN: "<PageDown>",
+               pygame.K_DELETE: "<Delete>",
+               pygame.K_HOME: "<Home>",
+               pygame.K_PRINT: "<PrintScreen>",
+               pygame.K_END: "<End>",
+               pygame.K_SCROLLOCK: "<ScrollLock>",
+               pygame.K_BREAK: "<Break>",
+               pygame.K_PAUSE: "<Pause>",
+               pygame.K_SYSREQ: "<SysReq>",
+               pygame.K_MENU: "<Menu>",
+               pygame.K_HELP: "<Help>",
+               pygame.K_F1: "<F1>",
+               pygame.K_F2: "<F2>",
+               pygame.K_F3: "<F3>",
+               pygame.K_F4: "<F4>",
+               pygame.K_F5: "<F5>",
+               pygame.K_F6: "<F6>",
+               pygame.K_F7: "<F7>",
+               pygame.K_F8: "<F8>",
+               pygame.K_F9: "<F9>",
+               pygame.K_F10: "<F10>",
+               pygame.K_F11: "<F11>",
+               pygame.K_F12: "<F12>",
+               }
+
 
 class EventType(enum.Enum):
     quit = "quit"
@@ -91,10 +134,7 @@ def translate_button(button):
         return Button.horizontal_scroll, HorizontalScrollDirection.right
 
 
-FUNCTION_KEYS = [pygame.K_F1, pygame.K_F2, pygame.K_F3,
-                 pygame.K_F4, pygame.K_F5, pygame.K_F6,
-                 pygame.K_F7, pygame.K_F8, pygame.K_F9,
-                 pygame.K_F10, pygame.K_F11, pygame.K_F12]
+FUNCTION_KEYS = []
 
 
 def expand_event(event):
@@ -102,56 +142,8 @@ def expand_event(event):
         return EventType.quit, None
 
     elif event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_RETURN:
-            key_value = "\n"  # pygame uses "\r", which is less pythonic
-        elif event.key in (pygame.K_LSHIFT, pygame.K_RSHIFT):
-            key_value = "<Shift>"
-        elif event.key in (pygame.K_LALT, pygame.K_RALT):
-            key_value = "<Alt>"
-        elif event.key in (pygame.K_LCTRL, pygame.K_RCTRL):
-            key_value = "<Ctrl>"
-        elif event.key in (pygame.K_LSUPER, pygame.K_RSUPER):
-            key_value = "<Super>"
-        elif event.key in (pygame.K_LMETA, pygame.K_RMETA):
-            key_value = "<Meta>"
-        elif event.key == pygame.K_LEFT:
-            key_value = "<Left>"
-        elif event.key == pygame.K_RIGHT:
-            key_value = "<Right>"
-        elif event.key == pygame.K_UP:
-            key_value = "<Up>"
-        elif event.key == pygame.K_DOWN:
-            key_value = "<Down>"
-        elif event.key == pygame.K_ESCAPE:
-            key_value = "<Escape>"
-        elif event.key == pygame.K_INSERT:
-            key_value = "<Insert>"
-        elif event.key == pygame.K_PAGEUP:
-            key_value = "<PageUp>"
-        elif event.key == pygame.K_PAGEDOWN:
-            key_value = "<PageDown>"
-        elif event.key == pygame.K_DELETE:
-            key_value = "<Delete>"
-        elif event.key == pygame.K_HOME:
-            key_value = "<Home>"
-        elif event.key == pygame.K_PRINT:
-            key_value = "<PrintScreen>"
-        elif event.key == pygame.K_END:
-            key_value = "<End>"
-        elif event.key == pygame.K_SCROLLOCK:
-            key_value = "<ScrollLock>"
-        elif event.key == pygame.K_BREAK:
-            key_value = "<Break>"
-        elif event.key == pygame.K_PAUSE:
-            key_value = "<Pause>"
-        elif event.key == pygame.K_SYSREQ:
-            key_value = "<SysReq>"
-        elif event.key == pygame.K_MENU:
-            key_value = "<Menu>"
-        elif event.key == pygame.K_HELP:
-            key_value = "<Help>"
-        elif event.key in FUNCTION_KEYS:
-            key_value = "<F{}>".format(FUNCTION_KEYS.index(event.key) + 1)
+        if event.key in KEY_MAPPING:
+            key_value = KEY_MAPPING[event.key]
         elif event.unicode:
             key_value = event.unicode
         else:

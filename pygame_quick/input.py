@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import pygame
 
 from .shortcuts import with_pygame_inited, extract_position_args
+from . import events
 
 
 @with_pygame_inited
@@ -29,3 +30,24 @@ def mouse_position():
 @with_pygame_inited
 def set_mouse_position(*args, **kwargs):
     pygame.mouse.set_pos(extract_position_args(args, kwargs))
+
+
+@with_pygame_inited
+def is_key_pressed(key):
+    keys = pygame.key.get_pressed()
+    for const, name in events.KEY_MAPPING.items():
+        if name == key and keys[const]:
+            return True
+    return False
+
+
+@with_pygame_inited
+def is_mouse_pressed(button):
+    l, m, r = pygame.mouse.get_pressed()
+    if button is events.Button.left:
+        return bool(l)
+    if button is events.Button.right:
+        return bool(r)
+    if button is events.Button.middle:
+        return bool(m)
+    return False

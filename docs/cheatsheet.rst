@@ -428,6 +428,19 @@ Use ``pgq.set_mouse_position``::
 
     pgq.set_mouse_position(window.center)
 
+What about keys? Can I test for them without looking though the events?
+-----------------------------------------------------------------------
+
+Yes. To test for a key, use::
+
+    if pgq.is_key_pressed("<Shift>"):
+        print("Shift is pressed")
+
+To test for mouse button, do::
+
+    if pgq.is_button_pressed(pgq.left_button):
+        print("Left mouse button is pressed")
+
 I made a snake program, and the snake went really fast!
 -------------------------------------------------------
 
