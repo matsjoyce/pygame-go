@@ -26,9 +26,8 @@ SNAKE_SIZE = 20
 
 window = pgq.window(600, 400, frame_rate=5)
 
-cx, cy = window.center
 snake_dx, snake_dy = 0, SNAKE_SIZE
-snake_dead = False
+cx, cy = window.center
 snake_parts = [(cx, cy - SNAKE_SIZE * i) for i in range(3)]
 food_location = (random.randrange(window.width // SNAKE_SIZE) * SNAKE_SIZE,
                  random.randrange(window.height // SNAKE_SIZE) * SNAKE_SIZE)
@@ -43,15 +42,9 @@ food_image = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="red")
 
 while window.active():
     window.fill("white")
-    if snake_dead:
-        window.draw_text(text="Score: {}".format(len(snake_parts) - 3), position=window.topleft, color="black")
-        window.draw_text(text="YOU DIED!", position=window.center, color="red", size=60, align=pgq.center)
-        window.update()
-        continue
 
     for event in window.events():
-        print(event)
-        if event.is_key():
+        if event.is_key() and event.key in ["<Left>", "<Right>", "<Up>", "<Down>"]:
             if event.key == "<Left>" and snake_dx != SNAKE_SIZE:
                 snake_dx, snake_dy = -SNAKE_SIZE, 0
             elif event.key == "<Right>" and snake_dx != -SNAKE_SIZE:
@@ -60,28 +53,26 @@ while window.active():
                 snake_dx, snake_dy = 0, -SNAKE_SIZE
             elif event.key == "<Down>" and snake_dy != -SNAKE_SIZE:
                 snake_dx, snake_dy = 0, SNAKE_SIZE
-            else:
-                continue
             break
 
-    head_x, head_y = snake_parts[0]
-    head_x = (head_x + snake_dx) % window.width
-    head_y = (head_y + snake_dy) % window.height
-    new_snake = [(head_x, head_y)] + snake_parts[:-1]
-    if food_location in new_snake:
-        new_snake.append(snake_parts[-1])
-        food_location = (random.randrange(window.width // SNAKE_SIZE) * SNAKE_SIZE,
-                         random.randrange(window.height // SNAKE_SIZE) * SNAKE_SIZE)
-    snake_parts = new_snake
-    snake_dead = snake_parts[0] in snake_parts[1:]
+    if snake_parts[0] in snake_parts[1:]:
+        window.draw_text(text="YOU DIED!", position=window.center, color="red", size=100, align=pgq.center)
+    else:
+        head_x, head_y = snake_parts[0]
+        snake_parts.insert(0, ((head_x + snake_dx) % window.width,
+                               (head_y + snake_dy) % window.height))
+        if food_location in snake_parts:
+            food_location = (random.randrange(window.width // SNAKE_SIZE) * SNAKE_SIZE,
+                             random.randrange(window.height // SNAKE_SIZE) * SNAKE_SIZE)
+        else:
+            snake_parts.pop()
 
     for i, part in enumerate(snake_parts):
         if i == 0:
             window.draw_image(head_image, part)
-        elif i % 2:
-            window.draw_image(tail_image_odd, part)
         else:
-            window.draw_image(tail_image_even, part)
+            window.draw_image(tail_image_odd if i % 2 else tail_image_even, part)
+
     window.draw_image(food_image, food_location)
     window.draw_text(text="Score: {}".format(len(snake_parts) - 3), position=window.topleft, color="black")
     window.update()
