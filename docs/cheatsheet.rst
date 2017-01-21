@@ -252,11 +252,7 @@ Yup, just like rectangles. Do draw a cyan border of thickness 10 do::
 Any other shapes?
 -----------------
 
-Yes! You can draw lines::
-
-    window.draw_line(start=window.topleft, end=window.bottomright, color="gray")
-
-And ellipses::
+Yes! You can draw ellipses::
 
     window.draw_ellipse(position=window.center, width=100, height=50, color="blue")
     window.draw_hollow_ellipse(position=window.center, width=100, height=50, color="blue", thickness=5)
