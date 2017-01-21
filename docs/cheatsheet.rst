@@ -249,6 +249,18 @@ Yup, just like rectangles. Do draw a cyan border of thickness 10 do::
 
     image.draw_hollow_circle(position=image.center, radius=20, color="cyan", thickness=10)
 
+Any other shapes?
+-----------------
+
+Yes! You can draw lines::
+
+    window.draw_line(start=window.topleft, end=window.bottomright, color="gray")
+
+And ellipses::
+
+    window.draw_ellipse(position=window.center, width=100, height=50, color="blue")
+    window.draw_hollow_ellipse(position=window.center, width=100, height=50, color="blue", thickness=5)
+
 Eh, thinking up color names is a pain. Is there a list somewhere?
 -----------------------------------------------------------------
 

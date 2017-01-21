@@ -33,4 +33,7 @@ window.draw_hollow_rect(position=(150, 300), size=(300, 75), color="yellow", thi
 window.draw_circle(position=(500, 150), radius=80, color="green")
 window.draw_hollow_circle(position=(500, 150), radius=80, color="magenta", thickness=20)
 
+window.draw_ellipse(position=(300, 150), size=(50, 100), color="gray")
+window.draw_hollow_ellipse(position=(300, 150), size=(50, 100), color="black", thickness=5)
+
 window.loop_forever()

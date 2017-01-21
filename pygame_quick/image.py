@@ -160,6 +160,30 @@ class image:
 
         pygame.draw.circle(self._image, color, position, radius, thickness)
 
+    def draw_ellipse(self, **kwargs):
+        ae = ArgumentExtractor(kwargs)
+        width, height = ae.extract_size()
+        x, y = ae.extract_position()
+        color = ae.extract_color()
+        ae.finalize()
+
+        x -= width // 2
+        y -= height // 2
+
+        pygame.draw.ellipse(self._image, color, (x, y, width, height))
+
+    def draw_hollow_ellipse(self, *, thickness=1, **kwargs):
+        ae = ArgumentExtractor(kwargs)
+        width, height = ae.extract_size()
+        x, y = ae.extract_position()
+        color = ae.extract_color()
+        ae.finalize()
+
+        x -= width // 2
+        y -= height // 2
+
+        pygame.draw.ellipse(self._image, color, (x, y, width, height), thickness)
+
     def draw_line(self, *, thickness=1, **kwargs):
         ae = ArgumentExtractor(kwargs)
         start = ae.extract_position("start", ("start_x", "start_y"))
@@ -169,6 +193,7 @@ class image:
 
         pygame.draw.line(self._image, color, start, end, thickness)
 
+    @staticmethod
     @with_pygame_inited
     @functools.lru_cache(None)
     def _all_fonts():
