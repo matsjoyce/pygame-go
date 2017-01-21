@@ -108,7 +108,7 @@ class image:
         return self.size
 
     def draw_image(self, image, *args, **kwargs):
-        ox, oy = extract_align_kwargs(kwargs, image.size)
+        ox, oy = extract_align_kwargs(kwargs, image._image.get_size())
         x, y = extract_position_args(args, kwargs)
 
         self._image.blit(image._image, (x - ox, y - oy))

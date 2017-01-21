@@ -44,22 +44,22 @@ def block_to_point(block_x, block_y):
 
 while window.active():
     if not paused:
-        new_cells = set()
-        maybe_alive = cells.copy()
+        old_cells = cells
+        cells = set()
+        maybe_alive = old_cells.copy()
         checked = set()
         while maybe_alive - checked:
             x, y = (maybe_alive - checked).pop()
             checked.add((x, y))
-            number_of_neighbours = -((x, y) in cells)
+            number_of_neighbours = -((x, y) in old_cells)
             for i in (-1, 0, 1):
                 for j in (-1, 0, 1):
-                    if (x + i, y + j) in cells:
+                    if (x + i, y + j) in old_cells:
                         number_of_neighbours += 1
-                    if (x, y) in cells:
+                    if (x, y) in old_cells:
                         maybe_alive.add((x + i, y + j))
-            if number_of_neighbours == 3 or number_of_neighbours == 2 and (x, y) in cells:
-                new_cells.add((x, y))
-        cells = new_cells
+            if number_of_neighbours == 3 or number_of_neighbours == 2 and (x, y) in old_cells:
+                cells.add((x, y))
 
     for type, value in window.events():
         if type is pgq.mouse_down and value.button is pgq.left_button:
@@ -70,7 +70,7 @@ while window.active():
             elif value in "+=":
                 block_size += 1
             elif value == "-":
-                block_size = max(1, block_size - 1)
+                block_size = max(4, block_size - 1)
             elif value == "c":
                 cells.clear()
         if type is pgq.mouse_motion and value.is_pressed(pgq.left_button):

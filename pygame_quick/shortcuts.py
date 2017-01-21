@@ -52,44 +52,43 @@ def with_display_inited(func=None):
 
 def extract_position_kwargs(kwargs, single_name="position", multi_names=("x", "y")):
     got_in_single = single_name in kwargs
-    got_in_multi = all(i in kwargs for i in multi_names)
+    got_in_multi = [kwargs[i] for i in multi_names if i in kwargs]
     if got_in_single and got_in_multi:
         raise TypeError("You must give either {} or {}, {} and {}, not both!".format(single_name, *multi_names[:3]))
     elif got_in_single:
-        pos = kwargs[single_name]
+        return check_position(kwargs[single_name])
     elif got_in_multi:
-        pos = (kwargs[i] for i in multi_names)
-    else:
-        raise TypeError("You must give either {} or {} and {}".format(single_name, *multi_names))
-    return check_position(pos)
+        return check_position(got_in_multi)
+    raise TypeError("You must give either {} or {} and {}".format(single_name, *multi_names))
 
 
 def extract_position_args(args, kwargs, *kwarg_extract):
     if not args:
         return extract_position_kwargs(kwargs, *kwarg_extract)
-    elif len(args) > 1:
-        color = args
-    else:
-        color = args[0]
-    if kwargs:
+    elif kwargs:
         raise TypeError("Unused arguments {}. Either use position arguments or keyword arguments, not both!".format(kwargs))
-    return check_position(color)
+    elif len(args) == 1:
+        return check_position(args[0])
+    else:
+        return check_position(args)
 
 
 def check_position(value):
     try:
-        value = iter(value)
+        coord = [int(v) for v in value]
     except (TypeError, ValueError):
-        raise ValueError("Position must be iterable, not {}".format(type(value)))
-    coord = []
-    for v in value:
         try:
-            coord.append(int(v))
-        except ValueError:
-            raise RuntimeError("Position component must be a number, not {}".format(type(v)))
-    if len(coord) != 2:
-        raise ValueError("Positions must have two components")
-    return tuple(coord)
+            value = iter(value)
+        except (TypeError, ValueError):
+            raise ValueError("Position must be iterable, not {}".format(type(value)))
+        for v in value:
+            try:
+                int(v)
+            except (TypeError, ValueError):
+                raise ValueError("Position component must be a number, not {}".format(type(v)))
+    if len(coord) == 2:
+        return coord
+    raise ValueError("Positions must have two components, not {}".format(len(coord)))
 
 
 def extract_size_kwargs(kwargs, single_name="size", multi_names=("width", "height")):
@@ -148,8 +147,8 @@ def check_color(value):
     for v in value:
         try:
             proc.append(color.color_clamp(v))
-        except ValueError:
-            raise RuntimeError("Color component must be a number, not {}".format(type(v)))
+        except (TypeError, ValueError):
+            raise ValueError("Color component must be a number, not {}".format(type(v)))
     if len(proc) not in (3, 4):
         raise ValueError("Colors must have 3 or 4 components for RGBA")
     return tuple(proc)
@@ -169,16 +168,18 @@ def translate_align(align, width, height):
 
 
 def extract_align_kwargs(kwargs, size, single_name="align", multi_names=("align_x", "align_y")):
-    if "align" in kwargs:
-        if "align_x" in kwargs:
-            raise TypeError("You can only give align or align_x and align_y, not both!")
-        if kwargs["align"] in image.Alignment:
-            return translate_align(kwargs.pop("align"), *size)
+    got_single = single_name in kwargs
+    got_multi = [kwargs.pop(i) for i in multi_names if i in kwargs]
+    if got_single and got_multi:
+        raise TypeError("You can only give align or align_x and align_y, not both!")
+    elif got_single:
+        if kwargs[single_name] in image.Alignment:
+            return translate_align(kwargs.pop(single_name), *size)
         else:
-            return check_position(kwargs.pop("align"))
-    elif "align_x" in kwargs or "align_y" in kwargs:
-        if "align_x" in kwargs and "align_y" in kwargs:
-            return check_position((kwargs.pop("align_x"), kwargs.pop("align_y")))
+            return check_position(kwargs.pop(single_name))
+    elif got_multi:
+        if len(got_multi) == 2:
+            return check_position(got_multi)
         else:
             raise TypeError("You must give both align_x and align_y, or neither!")
     else:
