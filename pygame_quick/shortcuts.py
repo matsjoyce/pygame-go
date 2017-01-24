@@ -19,8 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import functools
 import pygame
 
-from . import colors, image
-
 
 def with_pygame_inited(func=None):
     if func is None:
@@ -120,6 +118,7 @@ def check_position(value):
 
 
 def check_color(value):
+    from . import colors
     if isinstance(value, colors.color):
         return value.color
     elif isinstance(value, str):
@@ -147,6 +146,7 @@ def check_color(value):
 
 
 def check_align(align, width, height):
+    from . import image
     if align is image.Alignment.center:
         return width // 2, height // 2
     elif align is image.Alignment.topleft:
