@@ -19,6 +19,9 @@
 #
 import os
 import sys
+
+# Provide blank pygame as we don't need it installed to read the metadata
+sys.modules["pygame"] = object()
 sys.path.insert(0, os.path.abspath('..'))
 
 import sphinx_rtd_theme
