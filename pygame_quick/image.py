@@ -60,19 +60,10 @@ class image:
 
     @classmethod
     @with_display_inited
-    def fromraw(cls, rawimage):
+    def _fromraw(cls, rawimage):
         obj = cls.__new__(cls)
         obj._image = rawimage.convert_alpha()
         return obj
-
-    def fill(self, *args, **kwargs):
-        ae = ArgumentExtractor(kwargs)
-        color = ae.extract_color(args=args)
-        ae.finalize()
-        self._image.fill(color)
-
-    def copy(self):
-        return self.fromraw(self._image.copy())
 
     @property
     def size(self):
@@ -106,6 +97,15 @@ class image:
     @property
     def bottomright(self):
         return self.size
+
+    def copy(self):
+        return self._fromraw(self._image.copy())
+
+    def fill(self, *args, **kwargs):
+        ae = ArgumentExtractor(kwargs)
+        color = ae.extract_color(args=args)
+        ae.finalize()
+        self._image.fill(color)
 
     def draw_image(self, image, *args, **kwargs):
         ae = ArgumentExtractor(kwargs)

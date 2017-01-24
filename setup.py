@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 from distutils.core import setup
+import pygame_quick
 
 setup(name="pygame-quick",
-      version="0.1",
-      author="Matthew Joyce",
-      author_email="matsjoyce@gmail.com",
+      version=pygame_quick.__version__,
+      author=pygame_quick.__author__,
+      author_email=pygame_quick.__author_email__,
+      maintainer=pygame_quick.__maintainer__,
+      maintainer_email=pygame_quick.__email__,
       description="A simplified version of pygame for use in teaching",
       url="https://github.com/matsjoyce/pygame-quick",
       download_url="https://github.com/matsjoyce/pygame-quick/releases",

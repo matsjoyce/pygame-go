@@ -102,5 +102,5 @@ class color:
 def initialise_colors():
     for name, values in pygame.colordict.THECOLORS.items():
         c = color(values)
-        setattr(color, name, c)
         color.colors[name] = c
+    color.colors["transparent"] = color(0, 0, 0, 0)

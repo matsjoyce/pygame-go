@@ -1,5 +1,5 @@
-Cheatsheet
-==========
+Tutorial
+========
 
 How do I import pygame-quick?
 -----------------------------

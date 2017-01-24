@@ -18,12 +18,6 @@ class sound:
         self._channel = None
         self._paused = False
 
-    def is_playing(self):
-        return self._channel is not None and self._channel.get_sound() == self._sound
-
-    def is_paused(self):
-        return self._paused
-
     def play(self, times=1, forever=False):
         self.stop()
         self._channel = pygame.mixer.find_channel()
@@ -48,6 +42,16 @@ class sound:
             self._channel.unpause()
             self._paused = False
 
+    def is_playing(self):
+        return self._channel is not None and self._channel.get_sound() == self._sound
+
+    def is_paused(self):
+        return self._paused
+
+    @property
+    def length(self):
+        return self._sound.get_length()
+
     @property
     def volume(self):
         return self._sound.get_volume()
@@ -55,7 +59,3 @@ class sound:
     @volume.setter
     def volume(self, value):
         self._sound.set_volume(value)
-
-    @property
-    def length(self):
-        return self._sound.get_length()

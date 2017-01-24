@@ -157,13 +157,6 @@ KEY_MAPPING = {pygame.K_BACKSPACE: "\b",
                }
 
 
-class EventType(enum.Enum):
-    quit = "quit"
-    key_down = "keypress"
-    mouse_down = "mouse"
-    mouse_motion = "mouse_motion"
-
-
 class Button(enum.Enum):
     left = "left"
     middle = "middle"
