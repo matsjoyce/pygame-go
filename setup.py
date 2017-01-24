@@ -2,10 +2,6 @@
 
 from distutils.core import setup
 import sys
-
-# Provide blank pygame as we don't need it installed to read the metadata
-sys.modules["pygame"] = object()
-
 import pygame_quick
 
 setup(name="pygame-quick",
