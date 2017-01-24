@@ -1,7 +1,7 @@
 pygame-quick
 ============
 
-A simplified version of PyGame for use in teaching
+A simplified version of PyGame for use in teaching.
 
 [![Documentation Status](https://readthedocs.org/projects/pygame-quick/badge/?version=latest)](http://pygame-quick.readthedocs.io/en/latest/?badge=latest)
 
@@ -10,7 +10,7 @@ Example
 
 Bounce a red ball around the screen:
 
-```py3
+```python
 import pygame_quick as pgq
 
 BALL_RADIUS = 50
@@ -42,7 +42,7 @@ while window.active():
 
 Equivalent pygame-only code:
 
-```py3
+```python
 import pygame
 
 BG_COLOR = (255, 255, 255)
@@ -93,7 +93,7 @@ while active:
 Documentation
 -------------
 
-Go to https://pygame-quick.rtfd.io.
+Go to https://pygame-quick.readthedocs.io.
 
 Requirements
 ------------
