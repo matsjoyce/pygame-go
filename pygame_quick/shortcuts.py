@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import functools
 import pygame
 
-from . import color, image
+from . import colors, image
 
 
 def with_pygame_inited(func=None):
@@ -120,11 +120,11 @@ def check_position(value):
 
 
 def check_color(value):
-    if isinstance(value, color.color):
+    if isinstance(value, colors.color):
         return value.color
     elif isinstance(value, str):
-        if value in color.color.colors:
-            return color.color.colors[value].color
+        if value in colors.color.colors:
+            return colors.color.colors[value].color
         else:
             raise ValueError("Unknown color '{}', maybe you spelt the name wrong?".format(value))
     try:

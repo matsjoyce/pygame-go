@@ -22,7 +22,7 @@ import pathlib
 import pygame
 import os
 
-from . import color as color_mod
+from . import colors
 from .shortcuts import with_pygame_inited, with_display_inited, ArgumentExtractor
 
 
@@ -235,4 +235,4 @@ class image:
         x, y = ae.extract_position(args=args)
         ae.finalize()
 
-        return color_mod.color(self._image.get_at((x, y)))
+        return colors.color(self._image.get_at((x, y)))
