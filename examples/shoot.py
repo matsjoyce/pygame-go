@@ -19,11 +19,11 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick
+import pygame_go
 
-window = pygame_quick.window(600, 400)
+window = pygame_go.window(600, 400)
 
-bullet = pygame_quick.image(10, 10)
+bullet = pygame_go.image(10, 10)
 bullet.draw_circle(position=bullet.center, radius=5, color="red")
 bullets = []
 
@@ -37,11 +37,11 @@ while window.active():
             new_bullets.append((x, y - 10))
     bullets = new_bullets
 
-    if pygame_quick.is_key_pressed(" "):
-        bullet_x, _ = pygame_quick.mouse_position()
+    if pygame_go.is_key_pressed(" "):
+        bullet_x, _ = pygame_go.mouse_position()
         bullets.append((bullet_x, window.height))
 
     for bullet_position in bullets:
-        window.draw_image(bullet, bullet_position, align=pygame_quick.center)
+        window.draw_image(bullet, bullet_position, align=pygame_go.center)
 
     window.update()

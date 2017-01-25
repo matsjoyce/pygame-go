@@ -19,14 +19,12 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick
+import pygame_go as pygo
 
-window = pygame_quick.window(600, 400)
-
-block = pygame_quick.image(10, 10)
-block.fill(pygame_quick.color.red)
+window = pygo.window(600, 400)
+block = pygo.image(10, 10, color="red")
 
 while window.active():
-    window.fill(pygame_quick.color.white)
-    window.draw_image(block, pygame_quick.mouse_position(), align=pygame_quick.center)
+    window.fill("white")
+    window.draw_image(block, pygo.mouse_position(), align=pygo.center)
     window.update()

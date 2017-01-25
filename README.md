@@ -1,9 +1,9 @@
-pygame-quick
-============
+pygame-go
+=========
 
-A simplified version of PyGame for use in teaching.
+A pythonic wrapper around PyGame, drastically reducing the complexity of 99% of PyGame programs. Especially useful for teaching.
 
-[![Documentation Status](https://readthedocs.org/projects/pygame-quick/badge/?version=latest)](http://pygame-quick.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/pygame-go/badge/?version=latest)](http://pygame-go.readthedocs.io/en/latest/?badge=latest)
 
 Example
 -------
@@ -11,11 +11,11 @@ Example
 Bounce a red ball around the screen:
 
 ```python
-import pygame_quick as pgq
+import pygame_go as pygo
 
 BALL_RADIUS = 50
 
-window = pgq.window(800, 600, frame_rate=60)
+window = pygo.window(800, 600, frame_rate=60)
 
 ball_x, ball_y = window.center
 ball_dx = ball_dy = 5
@@ -93,7 +93,7 @@ while active:
 Documentation
 -------------
 
-Go to https://pygame-quick.readthedocs.io.
+Go to https://pygame-go.readthedocs.io.
 
 Requirements
 ------------
@@ -114,7 +114,7 @@ Installation
 ------------
 
 ```bash
-git clone https://github.com/matsjoyce/pygame-quick.git
-cd pygame-quick
+git clone https://github.com/matsjoyce/pygame-go.git
+cd pygame-go
 python3 setup.py install
 ```

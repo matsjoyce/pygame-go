@@ -1,5 +1,5 @@
-Welcome to pygame-quick's documentation!
-========================================
+Welcome to pygame-go's documentation!
+=====================================
 
 .. toctree::
     :maxdepth: 1

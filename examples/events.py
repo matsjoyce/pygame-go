@@ -19,18 +19,18 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick
+import pygame_go
 
-window = pygame_quick.window(600, 400)
+window = pygame_go.window(600, 400)
 
 while window.active():
     for event in window.events():
         if event.is_mouse_press():
-            if event.button is pygame_quick.left_button:
+            if event.button is pygame_go.left_button:
                 print("Mouse click at", event.position, "using left button")
-            elif event.button is pygame_quick.right_button:
+            elif event.button is pygame_go.right_button:
                 print("Mouse click at", event.position, "using right button")
-            elif event.button is pygame_quick.middle_button:
+            elif event.button is pygame_go.middle_button:
                 print("Mouse click at", event.position, "using middle button")
 
         elif event.is_mouse_scroll():

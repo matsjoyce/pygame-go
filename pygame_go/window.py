@@ -1,5 +1,5 @@
 """
-pygame-quick - A simplified version of pygame for use in teaching
+pygame-go - PyGame for Humans!
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygame
 
-from . import image, events
+from . import images, events
 from .shortcuts import with_pygame_inited, ArgumentExtractor
 
 
-class window(image.image):
+class window(images.image):
     @with_pygame_inited
-    def __init__(self, *args, frame_rate=20, autoquit=True, title="pygame-quick", icon=None, **kwargs):
+    def __init__(self, *args, frame_rate=20, autoquit=True, title="pygame-go", icon=None, **kwargs):
         ae = ArgumentExtractor(kwargs)
         size = ae.extract_size(args=args)
         fill_with = ae.extract_color(default="white")

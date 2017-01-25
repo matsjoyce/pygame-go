@@ -1,5 +1,5 @@
 """
-pygame-quick - A simplified version of pygame for use in teaching
+pygame-go - PyGame for Humans!
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
@@ -118,12 +118,12 @@ def check_position(value):
 
 
 def check_color(value):
-    from . import colors
-    if isinstance(value, colors.color):
+    from .colors import color
+    if isinstance(value, color):
         return value.color
     elif isinstance(value, str):
-        if value in colors.color.colors:
-            return colors.color.colors[value].color
+        if value in color.colors:
+            return color.colors[value].color
         else:
             raise ValueError("Unknown color '{}', maybe you spelt the name wrong?".format(value))
     try:
@@ -146,16 +146,16 @@ def check_color(value):
 
 
 def check_align(align, width, height):
-    from . import image
-    if align is image.Alignment.center:
+    from .images import Alignment
+    if align is Alignment.center:
         return width // 2, height // 2
-    elif align is image.Alignment.topleft:
+    elif align is Alignment.topleft:
         return 0, 0
-    elif align is image.Alignment.topright:
+    elif align is Alignment.topright:
         return width, 0
-    elif align is image.Alignment.bottomleft:
+    elif align is Alignment.bottomleft:
         return 0, height
-    elif align is image.Alignment.bottomright:
+    elif align is Alignment.bottomright:
         return width, height
     else:
         return check_position(align)

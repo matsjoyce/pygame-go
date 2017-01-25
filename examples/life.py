@@ -19,11 +19,11 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick as pgq
+import pygame_go as pygo
 
 block_size = 20
 
-window = pgq.window(1000, 600, frame_rate=10)
+window = pygo.window(1000, 600, frame_rate=10)
 
 cells = set()
 paused = False
@@ -61,7 +61,7 @@ while window.active():
                 cells.add((x, y))
 
     for event in window.events():
-        if event.is_mouse_press() and event.button is pgq.left_button:
+        if event.is_mouse_press() and event.button is pygo.left_button:
             block = point_to_block(*event.position)
             if block in cells:
                 cells.remove(block)
@@ -76,16 +76,16 @@ while window.active():
                 block_size = max(4, block_size - 1)
             elif event.key == "c":
                 cells.clear()
-        if event.is_mouse_motion() and event.is_pressed(pgq.left_button):
+        if event.is_mouse_motion() and event.is_pressed(pygo.left_button):
             cells.add(point_to_block(*event.start))
             cells.add(point_to_block(*event.end))
 
     blocks_x, blocks_y = window.width // block_size, window.width // block_size
 
-    alive = pgq.image(block_size, block_size, color="white")
+    alive = pygo.image(block_size, block_size, color="white")
     alive.draw_hollow_rect(position=alive.topleft, size=alive.size, color="gray10")
 
-    dead = pgq.image(block_size, block_size, color="black")
+    dead = pygo.image(block_size, block_size, color="black")
     dead.draw_hollow_rect(position=dead.topleft, size=dead.size, color="gray10")
 
     for x in range(-blocks_x // 2 - 1, blocks_x // 2 + 2):

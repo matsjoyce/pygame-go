@@ -1,5 +1,5 @@
 """
-pygame-quick - A simplified version of pygame for use in teaching
+pygame-go - PyGame for Humans!
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
 
 This program is free software: you can redistribute it and/or modify

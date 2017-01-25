@@ -242,7 +242,7 @@ Classes
 
     Bases: :class:`image`
 
-    .. method:: __init__(<size>, *, [<color="white">, frame_rate=20, autoquit=True, title="pygame-quick", icon=None])
+    .. method:: __init__(<size>, *, [<color="white">, frame_rate=20, autoquit=True, title="pygame-go", icon=None])
 
         Create the window with the size ``<size>``. If ``<color>`` is given, the window will be filled with that color, otherwise it is filled with white. ``frame_rate`` is the number of updates per second, which is controlled during the :func:`update` method call. If ``autoquit`` is ``True``, then quit events will be processed automatically and :func:`active` will return ``False`` without any event processing by the user. If ``autoquit`` is ``False``, the quit events will be accessible though :func:`events`. ``title`` will be used to set the window title, see :attr:`title`. ``icon`` will be used to set the window icon, see :attr:`icon`.
 
@@ -584,7 +584,7 @@ Classes
 
         Type: :class:`str`
 
-        The key that was pressed. It can either be a single ASCII character or a modifier / non-printable key like ``<Shift>`` or ``<Ctrl>``. See ``pygame_quick/events.py`` for the full listing.
+        The key that was pressed. It can either be a single ASCII character or a modifier / non-printable key like ``<Shift>`` or ``<Ctrl>``. See ``pygame_go/events.py`` for the full listing.
 
 .. class:: QuitEvent
 

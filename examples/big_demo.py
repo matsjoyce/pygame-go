@@ -1,7 +1,7 @@
 """
 big_demo.py
 ===========
-A big lot of random drawing and event handling, for some basic testing of pygame-quick.
+A big lot of random drawing and event handling, for some basic testing of pygame-go.
 Press "b" to change the background to a random color, move the mouse to have the red block follow.
 
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
@@ -20,32 +20,32 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick
+import pygame_go
 import random
 
-window = pygame_quick.window(600, 400)
+window = pygame_go.window(600, 400)
 
-background_color = pygame_quick.color.white
+background_color = pygame_go.color.colors["white"]
 block_x = block_y = 50
 
-block = pygame_quick.image(10, 10)
-block.fill(pygame_quick.color.red)
-block2 = pygame_quick.image(10, 10)
+block = pygame_go.image(10, 10)
+block.fill(pygame_go.color.colors["red"])
+block2 = pygame_go.image(10, 10)
 block2.fill(255, 0, 255)
-block3 = pygame_quick.image(10, 100)
+block3 = pygame_go.image(10, 100)
 block3.fill("blue")
-block4 = pygame_quick.image(10, 100)
+block4 = pygame_go.image(10, 100)
 block4.fill("tomato")
 
 while window.active():
     for event in window.events():
         print(repr(event))
         if event.is_mouse_press():
-            if event.button is pygame_quick.left_button:
+            if event.button is pygame_go.left_button:
                 print("Mouse click at", event.position, "using left button")
-            elif event.button is pygame_quick.right_button:
+            elif event.button is pygame_go.right_button:
                 print("Mouse click at", event.position, "using right button")
-            elif event.button is pygame_quick.middle_button:
+            elif event.button is pygame_go.middle_button:
                 print("Mouse click at", event.position, "using middle button")
 
         elif event.is_mouse_scroll():
@@ -61,7 +61,7 @@ while window.active():
             elif event.key == "<Down>":
                 block_y += 1
             elif event.key == "b":
-                background_color = random.choice(list(pygame_quick.color.colors))
+                background_color = random.choice(list(pygame_go.color.colors))
             else:
                 print("Key", repr(event.key), "pressed")
 
@@ -70,17 +70,17 @@ while window.active():
     window.draw_rect(color="blue", x=100, y=100, width=100, height=100)
     window.draw_hollow_rect(color="red", x=100, y=100, width=100, height=100, thickness=10)
 
-    window.draw_rect(color="yellow", x=100, y=100, width=100, height=100, align=pygame_quick.topright)
+    window.draw_rect(color="yellow", x=100, y=100, width=100, height=100, align=pygame_go.topright)
     window.draw_hollow_rect(color="green", x=100, y=100, width=100, height=100,
-                            thickness=10, align=pygame_quick.topright)
+                            thickness=10, align=pygame_go.topright)
 
-    window.draw_rect(color="brown", x=100, y=100, width=100, height=100, align=pygame_quick.bottomleft)
+    window.draw_rect(color="brown", x=100, y=100, width=100, height=100, align=pygame_go.bottomleft)
     window.draw_hollow_rect(color="blue", x=100, y=100, width=100, height=100,
-                            thickness=10, align=pygame_quick.bottomleft)
+                            thickness=10, align=pygame_go.bottomleft)
 
-    window.draw_rect(color="gray", x=100, y=100, width=100, height=100, align=pygame_quick.bottomright)
+    window.draw_rect(color="gray", x=100, y=100, width=100, height=100, align=pygame_go.bottomright)
     window.draw_hollow_rect(color="black", x=100, y=100, width=100, height=100,
-                            thickness=10, align=pygame_quick.bottomright)
+                            thickness=10, align=pygame_go.bottomright)
 
     window.draw_circle(color="green", x=500, y=300, radius=100)
 
@@ -88,13 +88,13 @@ while window.active():
     window.draw_hollow_circle(color="red", x=500, y=300, radius=100, thickness=10)
 
     window.draw_image(block, block_x, block_y)
-    window.draw_image(block2, pygame_quick.mouse_position(), align=pygame_quick.center)
-    window.draw_image(block3, window.center, align=pygame_quick.center)
+    window.draw_image(block2, pygame_go.mouse_position(), align=pygame_go.center)
+    window.draw_image(block3, window.center, align=pygame_go.center)
     window.draw_image(block4, (50, 20))
-    window.draw_image(block4, window.bottomright, align=pygame_quick.bottomright)
+    window.draw_image(block4, window.bottomright, align=pygame_go.bottomright)
 
-    window.draw_text(text=str(window.frame_number), position=window.topleft, color=pygame_quick.color.black)
-    window.draw_text(text=str(window.frame_number), position=window.bottomright, color=pygame_quick.color.black,
-                     align=pygame_quick.bottomright)
+    window.draw_text(text=str(window.frame_number), position=window.topleft, color="black")
+    window.draw_text(text=str(window.frame_number), position=window.bottomright, color="black",
+                     align=pygame_go.bottomright)
 
     window.update()

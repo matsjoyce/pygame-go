@@ -19,12 +19,12 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick as pgq
+import pygame_go as pygo
 import random
 
 SNAKE_SIZE = 20
 
-window = pgq.window(600, 400, frame_rate=5)
+window = pygo.window(600, 400, frame_rate=5)
 
 snake_dx, snake_dy = 0, SNAKE_SIZE
 cx, cy = window.center
@@ -32,13 +32,13 @@ snake_parts = [(cx, cy - SNAKE_SIZE * i) for i in range(3)]
 food_location = (random.randrange(window.width // SNAKE_SIZE) * SNAKE_SIZE,
                  random.randrange(window.height // SNAKE_SIZE) * SNAKE_SIZE)
 
-head_image = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="white")
+head_image = pygo.image(SNAKE_SIZE, SNAKE_SIZE, color="white")
 head_image.draw_circle(position=head_image.center, radius=2, color="black")
 head_image.draw_hollow_rect(position=head_image.topleft, size=head_image.size, color="black")
 
-tail_image_even = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="yellow")
-tail_image_odd = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="green")
-food_image = pgq.image(SNAKE_SIZE, SNAKE_SIZE, color="red")
+tail_image_even = pygo.image(SNAKE_SIZE, SNAKE_SIZE, color="yellow")
+tail_image_odd = pygo.image(SNAKE_SIZE, SNAKE_SIZE, color="green")
+food_image = pygo.image(SNAKE_SIZE, SNAKE_SIZE, color="red")
 
 while window.active():
     window.fill("white")
@@ -56,7 +56,7 @@ while window.active():
             break
 
     if snake_parts[0] in snake_parts[1:]:
-        window.draw_text(text="YOU DIED!", position=window.center, color="red", size=100, align=pgq.center)
+        window.draw_text(text="YOU DIED!", position=window.center, color="red", size=100, align=pygo.center)
     else:
         head_x, head_y = snake_parts[0]
         snake_parts.insert(0, ((head_x + snake_dx) % window.width,

@@ -1,16 +1,16 @@
 Tutorial
 ========
 
-How do I import pygame-quick?
------------------------------
+How do I import pygame-go?
+--------------------------
 
 Like this::
 
-    import pygame_quick
+    import pygame_go
 
 Alternatively, to have a shorter name, use::
 
-    import pygame_quick as pgq
+    import pygame_go as pygo
 
 The rest of this sheet will assume the shorter name.
 
@@ -19,21 +19,21 @@ How do I create a window to draw in?
 
 You need to decide the width and height of the window. Say you wanted a window with a width of ``600`` and a height of ``400``::
 
-    window = pgq.window(600, 400)
+    window = pygo.window(600, 400)
 
 You can also write it like this::
 
-    window = pgq.window(width=600, height=400)
+    window = pygo.window(width=600, height=400)
 
 Or::
 
     WINDOW_SIZE = (600, 400)
-    window = pgq.window(WINDOW_SIZE)
+    window = pygo.window(WINDOW_SIZE)
 
 Or::
 
     WINDOW_SIZE = (600, 400)
-    window = pgq.window(size=WINDOW_SIZE)
+    window = pygo.window(size=WINDOW_SIZE)
 
 I made a window, but then it vanished again???
 ----------------------------------------------
@@ -47,12 +47,12 @@ If you do not need to do any new drawing for each frame, you can write is like t
 
     window.loop_forever()
 
-Why is the window always called "pygame-quick"? I want to call it "MY EPIC THING"!
-----------------------------------------------------------------------------------
+Why is the window always called "pygame-go"? I want to call it "MY EPIC THING"!
+-------------------------------------------------------------------------------
 
 Do this::
 
-    window = pgq.window(size=WINDOW_SIZE, title="MY EPIC THING")
+    window = pygo.window(size=WINDOW_SIZE, title="MY EPIC THING")
 
 You can also do this::
 
@@ -60,7 +60,7 @@ You can also do this::
 
 If you want to set the icon::
 
-    window = pgq.window(size=WINDOW_SIZE, icon=image)
+    window = pygo.window(size=WINDOW_SIZE, icon=image)
 
 Or::
 
@@ -84,7 +84,7 @@ Eh? What's a image?
 
 An image is something you can draw on. You can create images just like you created a window::
 
-    img = pgq.image(40, 30)
+    img = pygo.image(40, 30)
 
 That will create an image that has a width of ``40`` and a height of ``30``. A new image will be transparent. You can get the width and height of an image::
 
@@ -114,14 +114,14 @@ How do I get an image of a face?
 
 Well, one way is to have an image of a face, and load it. Say the image is called ``/home/bob/face.jpg``. You could load it like this::
 
-    face = pgq.image("/home/bob/face.jpg")
+    face = pygo.image("/home/bob/face.jpg")
 
 Wow! What if I want to put the face in the middle of the screen? Or a corner?
 -----------------------------------------------------------------------------
 
 To draw it in the center::
 
-    window.draw_image(face, window.center, align=pgq.center)
+    window.draw_image(face, window.center, align=pygo.center)
 
 Or::
 
@@ -129,7 +129,7 @@ Or::
 
 This says draw face such that the center of ``face`` is at the center of ``window``. If you want to put the top-right corner of face at the center of window, do this::
 
-    window.draw_image(face, window.center, align=pgq.topright)
+    window.draw_image(face, window.center, align=pygo.topright)
 
 For the position to draw to you can pick any of::
 
@@ -141,11 +141,11 @@ For the position to draw to you can pick any of::
 
 For the align you can pick from::
 
-    pgq.center
-    pgq.topleft
-    pgq.topright
-    pgq.bottomleft
-    pgq.bottomright
+    pygo.center
+    pygo.topleft
+    pygo.topright
+    pygo.bottomleft
+    pygo.bottomright
 
 Can I make my face bigger?
 --------------------------
@@ -189,11 +189,11 @@ If you need to fill an image with a see-though (transparent) color::
 
 That will fill image with red and will be 50% transparent. You can also specify the fill color when creating the image::
 
-    img = pgq.image(40, 30, color="red")
+    img = pygo.image(40, 30, color="red")
 
 And the same for the window::
 
-    window = pgq.window(size=WINDOW_SIZE, color="green")
+    window = pygo.window(size=WINDOW_SIZE, color="green")
 
 Ooo! Do I have to make an image if I want to draw a rectangle? It sounds like a lot of work...
 ----------------------------------------------------------------------------------------------
@@ -208,7 +208,7 @@ You can also write it like::
 
 But it is less clear that way. You can use ``align`` with ``draw_rect``::
 
-    image.draw_rect(position=(10, 20), size=(50, 10), color="blue", align=pgq.bottomright)
+    image.draw_rect(position=(10, 20), size=(50, 10), color="blue", align=pygo.bottomright)
 
 This means that ``position`` will be the bottom-right of the draw rectangle.
 
@@ -229,7 +229,7 @@ This will draw a border that is 1 pixel thick. Want a wider border? Let's say 5 
 
 Using ``align``::
 
-    image.draw_hollow_rect(x=10, y=20, width=50, height=10, color="blue", thickness=5, align=pgq.bottomright)
+    image.draw_hollow_rect(x=10, y=20, width=50, height=10, color="blue", thickness=5, align=pygo.bottomright)
 
 Yay! How about a circle? A black one!
 -------------------------------------
@@ -260,10 +260,10 @@ Yes! You can draw ellipses::
 Eh, thinking up color names is a pain. Is there a list somewhere?
 -----------------------------------------------------------------
 
-Yes there is! It is called ``pgq.color_names``. Want a random color? Just this way::
+Yes there is! It is called ``pygo.color_names``. Want a random color? Just this way::
 
     import random
-    random.choice(pgq.color_names)
+    random.choice(pygo.color_names)
 
 Cool! I want to write my name. How?
 -----------------------------------
@@ -300,7 +300,7 @@ Ha! Show me how to put "YOU DIED!" in the middle of the window!
 
 ``draw_text`` accepts the same align arguments as ``draw``, so do it the same way::
 
-    window.draw_text(text="YOU DIED!", position=window.center, color="red", size=60, align=pgq.center)
+    window.draw_text(text="YOU DIED!", position=window.center, color="red", size=60, align=pygo.center)
 
 What if I want to draw a line from A to B?
 ------------------------------------------
@@ -372,17 +372,17 @@ What about just the left mouse button?
 
 For the left button::
 
-    if event.is_mouse_click() and event.button is pgq.left_button:
+    if event.is_mouse_click() and event.button is pygo.left_button:
         print("You clicked the left mouse button at", event.position)
 
 Right button::
 
-    if event.is_mouse_click() and event.button is pgq.right_button:
+    if event.is_mouse_click() and event.button is pygo.right_button:
         print("You clicked the right mouse button at", event.position)
 
 Middle button::
 
-    if event.is_mouse_click() and event.button is pgq.middle_button:
+    if event.is_mouse_click() and event.button is pygo.middle_button:
         print("You clicked the middle mouse button at", event.position)
 
 Scrolling! What about that?
@@ -395,10 +395,10 @@ Do this::
 
 ``event.direction`` will be one of::
 
-    pgq.up_scroll
-    pgq.down_scroll
-    pgq.left_scroll
-    pgq.right_scroll
+    pygo.up_scroll
+    pygo.down_scroll
+    pygo.left_scroll
+    pygo.right_scroll
 
 What about if they move the mouse?
 ----------------------------------
@@ -415,38 +415,38 @@ You can also see how much the mouse moved::
 
 If you want to see if any buttons were pressed during the movement, test them using ``event.is_pressed``::
 
-    if event.is_pressed(pgq.left_button):
+    if event.is_pressed(pygo.left_button):
         print("Drag with left button")
-    elif event.is_pressed(pgq.right_button):
+    elif event.is_pressed(pygo.right_button):
         print("Drag with right button")
-    elif event.is_pressed(pgq.middle_button):
+    elif event.is_pressed(pygo.middle_button):
         print("Drag with middle button")
 
 Just tell me where the mouse is now!
 ------------------------------------
 
-Use ``pgq.mouse_position``::
+Use ``pygo.mouse_position``::
 
-    print("The mouse is at", pgq.mouse_position())
+    print("The mouse is at", pygo.mouse_position())
 
 Can I move where the mouse is?
 ------------------------------
 
-Use ``pgq.set_mouse_position``::
+Use ``pygo.set_mouse_position``::
 
-    pgq.set_mouse_position(window.center)
+    pygo.set_mouse_position(window.center)
 
 What about keys? Can I test for them without looking though the events?
 -----------------------------------------------------------------------
 
 Yes. To test for a key, use::
 
-    if pgq.is_key_pressed("<Shift>"):
+    if pygo.is_key_pressed("<Shift>"):
         print("Shift is pressed")
 
 To test for mouse button, do::
 
-    if pgq.is_button_pressed(pgq.left_button):
+    if pygo.is_button_pressed(pygo.left_button):
         print("Left mouse button is pressed")
 
 I made a snake program, and the snake went really fast!
@@ -454,7 +454,7 @@ I made a snake program, and the snake went really fast!
 
 When you create your window, you can change how fast it updates::
 
-    window = pgq.window(WINDOW_SIZE, frame_rate=5)
+    window = pygo.window(WINDOW_SIZE, frame_rate=5)
 
 ``frame_rate`` is normally 20. You can make it smaller to slow the game down or larger to speed it up.
 
@@ -483,7 +483,7 @@ OK, last thing. I want explosion noises!
 
 Sure. If you call your sound file ``/home/bob/explosion.wav``, load it like this::
 
-    explosion = pgq.sound("/home/bob/explosion.wav")
+    explosion = pygo.sound("/home/bob/explosion.wav")
 
 Play it using::
 

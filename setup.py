@@ -2,18 +2,18 @@
 
 from distutils.core import setup
 import sys
-import pygame_quick
+import pygame_go as pygo
 
-setup(name="pygame-quick",
-      version=pygame_quick.__version__,
-      author=pygame_quick.__author__,
-      author_email=pygame_quick.__author_email__,
-      maintainer=pygame_quick.__maintainer__,
-      maintainer_email=pygame_quick.__email__,
+setup(name="pygame-go",
+      version=pygo.__version__,
+      author=pygo.__author__,
+      author_email=pygo.__author_email__,
+      maintainer=pygo.__maintainer__,
+      maintainer_email=pygo.__email__,
       description="A simplified version of pygame for use in teaching",
-      url="https://github.com/matsjoyce/pygame-quick",
-      download_url="https://github.com/matsjoyce/pygame-quick/releases",
-      packages=["pygame_quick"],
+      url="https://github.com/matsjoyce/pygame-go",
+      download_url="https://github.com/matsjoyce/pygame-go/releases",
+      packages=["pygame_go"],
       classifiers=[
             "Development Status :: 3 - Alpha",
             "Environment :: X11 Applications",

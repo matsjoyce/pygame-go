@@ -1,5 +1,5 @@
 """
-pygame-quick - A simplified version of pygame for use in teaching
+pygame-go - PyGame for Humans!
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
@@ -59,10 +59,9 @@ class image:
                 self.fill(fill_with)
 
     @classmethod
-    @with_display_inited
     def _fromraw(cls, rawimage):
         obj = cls.__new__(cls)
-        obj._image = rawimage.convert_alpha()
+        obj._image = rawimage
         return obj
 
     @property

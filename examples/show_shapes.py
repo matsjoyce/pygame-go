@@ -19,10 +19,9 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick
+import pygame_go
 
-window = pygame_quick.window(600, 400)
-window.fill("white")
+window = pygame_go.window(600, 400)
 
 window.draw_rect(position=(100, 100), size=(80, 80), color="red")
 window.draw_hollow_rect(position=(100, 100), size=(80, 80), color="cyan", thickness=1)

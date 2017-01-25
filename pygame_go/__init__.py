@@ -1,5 +1,5 @@
 """
-pygame-quick - A simplified version of pygame for use in teaching
+pygame-go - PyGame for Humans!
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from .window import window
-from .image import image, Alignment
+from .images import image, Alignment
 from .events import Button, ScrollDirection, ScrollDirection
 from .input import mouse_position, set_mouse_position, is_key_pressed, is_mouse_pressed
 from .colors import color, initialise_colors

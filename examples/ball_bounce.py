@@ -19,11 +19,11 @@ You should have received a copy of the Lesser GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import pygame_quick as pgq
+import pygame_go as pygo
 
 BALL_RADIUS = 50
 
-window = pgq.window(800, 600, frame_rate=60)
+window = pygo.window(800, 600, frame_rate=60)
 
 ball_x, ball_y = window.center
 ball_dx = ball_dy = 5
