@@ -619,3 +619,9 @@ Other functions
     :rtype: bool
 
     Returns whether the button ``button`` is currently pressed. ``button`` should be one of :data:`left_button`, :data:`right_button` or :data:`middle_button`.
+
+.. function:: monitor_resolution()
+
+    :rtype: 2-tuple of int
+
+    Width and height of the monitor.

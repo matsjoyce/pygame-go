@@ -73,7 +73,7 @@ while window.active():
             elif event.key in ("+", "="):
                 block_size += 1
             elif event.key == "-":
-                block_size = max(4, block_size - 1)
+                block_size = max(10, block_size - 1)
             elif event.key == "c":
                 cells.clear()
         if event.is_mouse_motion() and event.is_pressed(pygo.left_button):

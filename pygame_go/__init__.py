@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from .window import window
 from .images import image, Alignment
 from .events import Button, ScrollDirection, ScrollDirection
-from .input import mouse_position, set_mouse_position, is_key_pressed, is_mouse_pressed
+from .input import mouse_position, set_mouse_position, is_key_pressed, is_mouse_pressed, monitor_size
 from .colors import color, initialise_colors
 from .sound import sound
 
@@ -34,7 +34,7 @@ __email__ = "matsjoyce@gmail.com"
 __status__ = "Development"
 
 __all__ = ["window", "image", "mouse_position", "set_mouse_position", "is_key_pressed",
-           "is_mouse_pressed", "color", "color_names", "sound"]
+           "is_mouse_pressed", "monitor_size", "color", "color_names", "sound"]
 
 initialise_colors()
 color_names = list(color.colors)

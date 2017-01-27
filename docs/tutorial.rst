@@ -68,6 +68,19 @@ Or::
 
 ``image`` can be any image you want.
 
+How can I make the window fill the monitor?
+-------------------------------------------
+
+Simple::
+
+    window = pygo.window(pygo.monitor_size())
+
+If this covers your task bar, you can reduce the height a little bit::
+
+    w, h = pygo.monitor_size()
+    window = pygo.window(width=w, height=h - 80)
+
+
 But how do I draw stuff? That white screen is boring!
 -----------------------------------------------------
 

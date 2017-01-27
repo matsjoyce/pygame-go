@@ -54,3 +54,9 @@ def is_mouse_pressed(button):
     if button is events.Button.middle:
         return bool(m)
     return False
+
+
+@with_pygame_inited
+def monitor_size():
+    info = pygame.display.Info()
+    return info.current_w, info.current_h
