@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import enum
 import functools
+import math
 import pathlib
 import pygame
 import os
 
 from . import colors
-from .shortcuts import with_pygame_inited, with_display_inited, ArgumentExtractor
+from .shortcuts import with_pygame_inited, with_display_inited, ArgumentExtractor, check_position
 
 
 class Alignment(enum.Enum):
@@ -192,6 +193,39 @@ class image:
         ae.finalize()
 
         pygame.draw.line(self._image, color, start, end, thickness)
+
+    def draw_arc(self, *, start_angle, end_angle, thickness=1, **kwargs):
+        ae = ArgumentExtractor(kwargs)
+        width, height = ae.extract_size()
+        x, y = ae.extract_position()
+        color = ae.extract_color()
+        ae.finalize()
+
+        x -= width // 2
+        y -= height // 2
+
+        start_angle = math.radians(180 - start_angle - 90)
+        end_angle = math.radians(180 - end_angle - 90)
+
+        print(start_angle, end_angle)
+
+        pygame.draw.arc(self._image, color, (x, y, width, height), end_angle, start_angle, thickness)
+
+    def draw_polygon(self, points, **kwargs):
+        points = [check_position(i) for i in points]
+        ae = ArgumentExtractor(kwargs)
+        color = ae.extract_color()
+        ae.finalize()
+
+        pygame.draw.polygon(self._image, color, points)
+
+    def draw_hollow_polygon(self, points, *, thickness=1,  **kwargs):
+        points = [check_position(i) for i in points]
+        ae = ArgumentExtractor(kwargs)
+        color = ae.extract_color()
+        ae.finalize()
+
+        pygame.draw.polygon(self._image, color, points, thickness)
 
     @staticmethod
     @with_pygame_inited
