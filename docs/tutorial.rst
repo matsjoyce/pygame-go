@@ -267,8 +267,8 @@ Any other shapes?
 
 Yes! You can draw ellipses::
 
-    window.draw_ellipse(position=window.center, width=100, height=50, color="blue")
-    window.draw_hollow_ellipse(position=window.center, width=100, height=50, color="blue", thickness=5)
+    window.draw_ellipse(position=window.center, radius_x=100, radius_y=50, color="blue")
+    window.draw_hollow_ellipse(position=window.center, radius_x=100, radius_y=50, color="blue", thickness=5)
 
 Eh, thinking up color names is a pain. Is there a list somewhere?
 -----------------------------------------------------------------

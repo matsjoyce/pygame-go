@@ -163,27 +163,27 @@ class image:
 
     def draw_ellipse(self, **kwargs):
         ae = ArgumentExtractor(kwargs)
-        width, height = ae.extract_size()
+        radius_x, radius_y = ae.extract_size("radii", ("radius_x", "radius_y"))
         x, y = ae.extract_position()
         color = ae.extract_color()
         ae.finalize()
 
-        x -= width // 2
-        y -= height // 2
+        x -= radius_x
+        y -= radius_y
 
-        pygame.draw.ellipse(self._image, color, (x, y, width, height))
+        pygame.draw.ellipse(self._image, color, (x, y, radius_x * 2, radius_y * 2))
 
     def draw_hollow_ellipse(self, *, thickness=1, **kwargs):
         ae = ArgumentExtractor(kwargs)
-        width, height = ae.extract_size()
+        radius_x, radius_y = ae.extract_size("radii", ("radius_x", "radius_y"))
         x, y = ae.extract_position()
         color = ae.extract_color()
         ae.finalize()
 
-        x -= width // 2
-        y -= height // 2
+        x -= radius_x
+        y -= radius_y
 
-        pygame.draw.ellipse(self._image, color, (x, y, width, height), thickness)
+        pygame.draw.ellipse(self._image, color, (x, y, radius_x * 2, radius_y * 2), thickness)
 
     def draw_line(self, *, thickness=1, **kwargs):
         ae = ArgumentExtractor(kwargs)
@@ -196,20 +196,18 @@ class image:
 
     def draw_arc(self, *, start_angle, end_angle, thickness=1, **kwargs):
         ae = ArgumentExtractor(kwargs)
-        width, height = ae.extract_size()
+        radius_x, radius_y = ae.extract_size("radii", ("radius_x", "radius_y"))
         x, y = ae.extract_position()
         color = ae.extract_color()
         ae.finalize()
 
-        x -= width // 2
-        y -= height // 2
+        x -= radius_x
+        y -= radius_y
 
         start_angle = math.radians(180 - start_angle - 90)
         end_angle = math.radians(180 - end_angle - 90)
 
-        print(start_angle, end_angle)
-
-        pygame.draw.arc(self._image, color, (x, y, width, height), end_angle, start_angle, thickness)
+        pygame.draw.arc(self._image, color, (x, y, radius_x * 2, radius_y * 2), end_angle, start_angle, thickness)
 
     def draw_polygon(self, points, **kwargs):
         points = [check_position(i) for i in points]

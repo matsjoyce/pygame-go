@@ -184,17 +184,17 @@ Classes
 
         Draw a circular border of color ``<color>`` with radius ``radius`` and thickness ``thickness`` with its center at ``<position>``.
 
-    .. method:: draw_ellipse(*, <position>, <color>, <size>)
+    .. method:: draw_ellipse(*, <position>, <color>, <radii>)
 
         :rtype: None
 
-        Draw a ellipse of color ``<color>`` with radius ``radius`` with its center at ``<position>``. Its width and height is taken from ``<size>``.
+        Draw a ellipse of color ``<color>`` with radius ``radius`` with its center at ``<position>``. Its radii are taken from ``radii`` or ``radius_x`` and ``radius_y``.
 
-    .. method:: draw_hollow_ellipse(*, <position>, <color>, <size>, [thickness=1])
+    .. method:: draw_hollow_ellipse(*, <position>, <color>, <radii>, [thickness=1])
 
         :rtype: None
 
-        Draw a ellipse-shaped border of color ``<color>`` with radius ``radius`` and thickness ``thickness`` with its center at ``<position>``. Its width and height is taken from ``<size>``.
+        Draw a ellipse-shaped border of color ``<color>`` with radius ``radius`` and thickness ``thickness`` with its center at ``<position>``. Its radii are taken from ``radii`` or ``radius_x`` and ``radius_y``.
 
     .. method:: draw_line(*, <start>, <end>, <color>, [thickness=1])
 
@@ -202,11 +202,11 @@ Classes
 
         Draw a line from ``<start>`` to ``<end>`` with color ``<color>`` and thickness ``thickness``. For ``<start>``, provide ``start`` or ``start_x`` and ``start_y``. For ``<end>``, provide ``end`` or ``end_x`` and ``end_y``. ``<start>`` and ``<end>`` work the same as ``<position>`` in every other way.
 
-    .. method:: draw_arc(*, start_angle, end_angle, <position>, <color>, <size>, [thickness=1])
+    .. method:: draw_arc(*, start_angle, end_angle, <position>, <color>, <radii>, [thickness=1])
 
         :rtype: None
 
-        Draw part of a hollow ellipse defined by ``<position>`` and ``<size>`` (see :func:`draw_hollow_ellipse`) from ``start_angle`` to ``end_angle`` clockwise. The angles are in degrees, with ``0`` being directly above the center of the ellipse.
+        Draw part of a hollow ellipse defined by ``<position>`` and ``<radii>`` (see :func:`draw_hollow_ellipse`) from ``start_angle`` to ``end_angle`` clockwise. The angles are in degrees, with ``0`` being directly above the center of the ellipse.
 
     .. method:: draw_polygon(points, *, <color>)
 
