@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import pygame_go as pygo
 
-window = pygo.window(600, 400)
+window = pygo.window(600, 400, frame_rate=60)
 block = pygo.image(10, 10, color="red")
 collide_block = pygo.image(100, 100, color="green")
 

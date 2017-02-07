@@ -20,6 +20,8 @@ from .shortcuts import ArgumentExtractor
 
 
 def collides_rect_rect(**kwargs):
+    # http://stackoverflow.com/q/2752349
+
     ae = ArgumentExtractor(kwargs)
     x_a, y_a = ae.extract_position("position_a", ("x_a", "y_a"))
     x_b, y_b = ae.extract_position("position_b", ("x_b", "y_b"))
@@ -34,7 +36,7 @@ def collides_rect_rect(**kwargs):
     x_b -= ox_b
     y_b -= oy_b
 
-    return not (x_b > x_a + width_a
-                or x_b + width_b < x_a
-                or y_b > y_a + height_a
-                or y_b + height_b < y_a)
+    return (x_b <= x_a + width_a
+            and x_a <= x_b + width_b
+            and y_b <= y_a + height_a
+            and y_a <= y_b + height_b)
