@@ -22,6 +22,7 @@ from .events import Button, ScrollDirection, ScrollDirection
 from .input import mouse_position, set_mouse_position, is_key_pressed, is_mouse_pressed, monitor_size
 from .colors import color, initialise_colors
 from .sound import sound
+from .collisions import collides_rect_rect
 
 __version__ = "0.1.0-alpha"
 __author__ = "Matthew Joyce"
