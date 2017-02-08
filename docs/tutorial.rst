@@ -262,6 +262,17 @@ Yup, just like rectangles. Do draw a cyan border of thickness 10 do::
 
     image.draw_hollow_circle(position=image.center, radius=20, color="cyan", thickness=10)
 
+Triangles?
+----------
+
+Use the `draw_polygon` function::
+
+    image.draw_polygon(points=[(50, 0), (100, 70), (0, 70)], color="tomato")
+
+Outlines work too::
+
+    image.draw_hollow_polygon(points=[(50, 0), (100, 70), (0, 70)], color="blue", thickness=10)
+
 Any other shapes?
 -----------------
 
