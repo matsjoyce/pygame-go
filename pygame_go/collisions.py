@@ -40,3 +40,12 @@ def collides_rect_rect(**kwargs):
             and x_a <= x_b + width_b
             and y_b <= y_a + height_a
             and y_a <= y_b + height_b)
+
+
+def collides_circle_circle(*, radius_a, radius_b, **kwargs):
+    ae = ArgumentExtractor(kwargs)
+    x_a, y_a = ae.extract_position("position_a", ("x_a", "y_a"))
+    x_b, y_b = ae.extract_position("position_b", ("x_b", "y_b"))
+    ae.finalize()
+
+    return (x_a - x_b) ** 2 + (y_a - y_b) ** 2 < (radius_a + radius_b) ** 2

@@ -641,9 +641,14 @@ Other functions
 
     Width and height of the monitor.
 
-
 .. function:: collides_rect_rect(*, <position_a>, <size_a>, <align_a>, <position_b>, <size_b>, <align_b>)
 
     :rtype: bool
 
     Returns ``True`` if the rectangle ``a`` defined by ``<position_a>``, ``<size_a>`` and ``<align_a>`` collides with the rectangle ``b`` defined by ``<position_b>``, ``<size_b>`` and ``<align_b>``. Arguments follow the above conventions, with ``_a`` or ``_b`` added on the end.
+
+.. function:: collides_circle_circle(*, <position_a>, radius_a, <position_b>, radius_b)
+
+    :rtype: bool
+
+    Returns ``True`` if the circle ``a`` defined by ``<position_a>`` and ``radius_a`` collides with the rectangle ``b`` defined by ``<position_b>``and ``radius_b``. Arguments follow the above conventions, with ``_a`` or ``_b`` added on the end.

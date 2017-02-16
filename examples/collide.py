@@ -2,7 +2,8 @@
 collide.py
 ==========
 Move the cursor to move the red block.
-If the red block touches the black block, the screen turns black.
+If the red block touches the green block, the screen turns black.
+If the black circle inside the red block touches the green circle, the screen turns red.
 
 Copyright (C) 2017 Matthew Joyce (matsjoyce@gmail.com)
 
@@ -23,17 +24,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import pygame_go as pygo
 
 window = pygo.window(600, 400, frame_rate=60)
-block = pygo.image(10, 10, color="red")
+
+mode = 0
+
+cursor_block = pygo.image(20, 20, color="red")
+
+cursor_circle = pygo.image(20, 20)
+cursor_circle.draw_circle(position=cursor_circle.center, radius=cursor_circle.width // 2, color="red")
+
+collide_circle = pygo.image(100, 100)
+collide_circle.draw_circle(position=collide_circle.center, radius=collide_circle.width // 2, color="green")
+
 collide_block = pygo.image(100, 100, color="green")
 
 while window.active():
+    for event in window.events():
+        if event.is_key() and event.key == " ":
+            mode = (mode + 1) % 2
     position = pygo.mouse_position()
-    if pygo.collides_rect_rect(x_a=300, y_a=300, size_a=collide_block.size, align_a=pygo.center,
-                               position_b=position, size_b=block.size, align_b=pygo.center):
+    if mode == 0 and pygo.collides_rect_rect(position_a=window.center, size_a=collide_block.size, align_a=pygo.center,
+                                             position_b=position, size_b=cursor_block.size, align_b=pygo.center):
+        window.fill("black")
+    elif mode == 1 and pygo.collides_circle_circle(position_a=window.center, radius_a=collide_circle.width // 2,
+                                                   position_b=position, radius_b=cursor_circle.width // 2):
         window.fill("black")
     else:
         window.fill("white")
 
-    window.draw_image(collide_block, x=300, y=300, align=pygo.center)
-    window.draw_image(block, position, align=pygo.center)
+    if mode == 0:
+        window.draw_image(collide_block, window.center, align=pygo.center)
+        window.draw_image(cursor_block, position, align=pygo.center)
+    elif mode == 1:
+        window.draw_image(collide_circle, window.center, align=pygo.center)
+        window.draw_image(cursor_circle, position, align=pygo.center)
     window.update()

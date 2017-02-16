@@ -265,7 +265,7 @@ Yup, just like rectangles. Do draw a cyan border of thickness 10 do::
 Triangles?
 ----------
 
-Use the `draw_polygon` function::
+Use the ``draw_polygon`` function::
 
     image.draw_polygon(points=[(50, 0), (100, 70), (0, 70)], color="tomato")
 
