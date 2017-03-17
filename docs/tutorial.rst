@@ -92,7 +92,7 @@ Well, do some drawing in your main loop::
 
 To draw various things, look below! Remember, the window acts just like any other image. Anything you can do to an image, you can do to the window and vice-versa.
 
-Eh? What's a image?
+Eh? What's an image?
 -------------------
 
 An image is something you can draw on. You can create images just like you created a window::
