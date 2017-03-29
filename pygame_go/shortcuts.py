@@ -101,41 +101,44 @@ class ArgumentExtractor:
 
 def check_position(value):
     try:
-        coord = [int(v) for v in value]
-    except (TypeError, ValueError):
+        x, y = [int(v) for v in value]
+    except Exception:
         try:
             value = iter(value)
         except (TypeError, ValueError):
             raise ValueError("Position must be iterable, not {}".format(type(value)))
-        for v in value:
+        for i, v in value:
             try:
                 int(v)
             except (TypeError, ValueError):
                 raise ValueError("Position component must be a number, not {}".format(type(v)))
-    if len(coord) == 2:
-        return coord
-    raise ValueError("Positions must have two components, not {}".format(len(coord)))
+            if i == 2:
+                raise ValueError("Positions must have two components")
+    else:
+        return x, y
 
 
 def check_color(value):
     from .colors import color
-    if isinstance(value, color):
+    if type(value) is color:
         return value.color
-    elif isinstance(value, str):
+    elif type(value) is str:
         if value in color.colors:
             return color.colors[value].color
         else:
             raise ValueError("Unknown color '{}', maybe you spelt the name wrong?".format(value))
     try:
-        value = iter(value)
-    except (TypeError, ValueError):
-        raise ValueError("Color must be iterable, not {}".format(type(value)))
-    proc = []
-    for v in value:
+        proc = [int(v) % 256 for v in value]
+    except Exception:
         try:
-            proc.append(int(v) % 256)
+            value = iter(value)
         except (TypeError, ValueError):
-            raise ValueError("Color component must be a number, not {}".format(type(v)))
+            raise ValueError("Color must be iterable, not {}".format(type(value)))
+        for v in value:
+            try:
+                proc.append(int(v) % 256)
+            except (TypeError, ValueError):
+                raise ValueError("Color component must be a number, not {}".format(type(v)))
     length = len(proc)
     if length == 4:
         return proc

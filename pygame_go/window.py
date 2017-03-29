@@ -17,9 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import pygame
+import functools
 
 from . import images, events
 from .shortcuts import with_pygame_inited, ArgumentExtractor
+
+
+def require_active(func):
+    @functools.wraps(func)
+    def ra_wrapper(self, *args, **kwargs):
+        if not self.active():
+            raise RuntimeError("Cannot call {} on a non-active window".format(func.__name__))
+        return func(self, *args, **kwargs)
+    return ra_wrapper
 
 
 class window(images.image):
@@ -32,11 +42,11 @@ class window(images.image):
 
         if pygame.display.get_surface():
             raise RuntimeError("You can only create one window!")
+        self._active = True
         self.icon = icon
         self._image = pygame.display.set_mode(size)
         self.frame_rate = frame_rate
         self._clock = pygame.time.Clock()
-        self._active = True
         self._events = []
         self._autoquit = autoquit
         self.frame_number = 0
@@ -48,15 +58,19 @@ class window(images.image):
     def active(self):
         return self._active
 
+    @require_active
     def stop(self):
         self._active = False
+        pygame.quit()
 
+    @require_active
     def update(self):
         pygame.display.flip()
         self._clock.tick(self.frame_rate)
         self.frame_number += 1
         self._preprocess_events()
 
+    @require_active
     def loop_forever(self):
         while self.active():
             self.update()
@@ -71,14 +85,17 @@ class window(images.image):
             else:
                 self._events.append(event)
 
+    @require_active
     def has_events(self):
         return bool(self._events)
 
+    @require_active
     def next_event(self):
         if self._events:
             return self._events.pop(0)
         raise ValueError("There are no more events")
 
+    @require_active
     def events(self):
         while self.has_events():
             yield self.next_event()
@@ -93,18 +110,22 @@ class window(images.image):
         raise RuntimeError("Cannot scale a window")
 
     @property
+    @require_active
     def title(self):
         return pygame.display.get_caption()
 
     @title.setter
+    @require_active
     def title(self, name):
         pygame.display.set_caption(name)
 
     @property
+    @require_active
     def icon(self):
         return self._icon
 
     @icon.setter
+    @require_active
     def icon(self, image):
         self._icon = image
         if image is not None:
